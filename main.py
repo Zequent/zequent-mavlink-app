@@ -8,9 +8,8 @@ from kivy.uix.gridlayout import GridLayout
 translator = i18n.Translator('localization/')
 translator.set_locale('de')
 
-#print(translator.translate('welcome'))
 
-class LoginScreen(GridLayout):
+class StartScreen(GridLayout):
 
     def __init__(self, **kwargs):
         super(LoginScreen, self).__init__(**kwargs)
@@ -27,7 +26,7 @@ class LoginScreen(GridLayout):
 
 class ZequentMavLinkApp(App):
     def build(self):
-        return LoginScreen()
+        return StartScreen()
 
 
 if __name__ == '__main__':
