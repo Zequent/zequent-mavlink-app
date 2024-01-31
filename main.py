@@ -1,32 +1,22 @@
 import i18n
 import kivy
-from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
+from kivymd.app import MDApp
+
 
 translator = i18n.Translator('localization/')
 translator.set_locale('de')
 
-
-class StartScreen(GridLayout):
-
+class ZequentMavLinkApp(MDApp):
+    
     def __init__(self, **kwargs):
-        super(StartScreen, self).__init__(**kwargs)
-        self.cols = 1
+        super().__init__(**kwargs)
+    
+    def callback(self,x):
+        print(x)
 
-        welcomeLabel = Label(text=translator.translate('welcome'))
-        welcomeLabel.font_size = '50dp'
+    def get_welcome_text(self):
+        return translator.translate('welcome')
 
-        connectButton = Button(text=translator.translate('connect'))
-        connectButton.font_size = '50dp'
-
-        self.add_widget(welcomeLabel)
-        self.add_widget(connectButton)
-
-class ZequentMavLinkApp(App):
-    def build(self):
-        return StartScreen()
 
 
 if __name__ == '__main__':

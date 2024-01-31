@@ -1,0 +1,23 @@
+MDBoxLayout:
+    orientation: "vertical"
+
+    MDTopAppBar:
+        title: ""
+        #md_bg_color: app.theme_cls.accent_color
+        right_action_items:
+            [
+            ["home", lambda x: app.callback(x), "", "Home"],
+            ["message-star", lambda x: app.callback(x), "", "Message star"],
+            ["message-question", lambda x: app.callback(x), "" , "Message question"],
+            ["message-reply", lambda x: app.callback(x), "", "Message reply"],
+            ]
+        left_action_items: 
+            [
+            ["menu", lambda x: app.callback_1()],
+            ["zequent_logo.png", lambda x: app.callback_1()]
+            ]
+        mode: "end"
+
+    MDLabel:
+        text: app.get_welcome_text()
+        halign: "center"
