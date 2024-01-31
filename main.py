@@ -12,7 +12,7 @@ translator.set_locale('de')
 class StartScreen(GridLayout):
 
     def __init__(self, **kwargs):
-        super(LoginScreen, self).__init__(**kwargs)
+        super(StartScreen, self).__init__(**kwargs)
         self.cols = 1
 
         welcomeLabel = Label(text=translator.translate('welcome'))
