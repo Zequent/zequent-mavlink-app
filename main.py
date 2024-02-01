@@ -10,6 +10,7 @@ class ZequentMavLinkApp(MDApp):
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        
     
     def callback(self,x):
         print(x)
