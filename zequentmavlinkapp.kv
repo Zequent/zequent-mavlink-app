@@ -3,7 +3,7 @@ ZequentMDBoxLayout:
 <ZequentMDBoxLayout@MDBoxLayout>:
     orientation: "vertical"
     MDTopAppBar:
-        title: ""
+        title: "---"
         right_action_items:
             [
             ["home", lambda x: app.callback(x), "", "Home"],
@@ -17,15 +17,47 @@ ZequentMDBoxLayout:
             ["zequent_logo.png", lambda x: app.callback_1()]
             ]
         mode: "end"
-
+        md_bg_color: [1,0.398,0.796,1]
     MDBoxLayout:
         orientation: "horizontal"
         size_hint: 1,0.1
+        md_bg_color: [1,0.398,0.796,1]
         Button:
             text: app.get_welcome_text()
             halign: "center"
         Button:
             text: app.get_welcome_text()
             halign: "center"
+            background_color: [1,0.398,0.796,1]
+    ScrollView:
+        do_scroll_y: True
+        MDGridLayout:
+            size_hint_y: None
+            orientation: "lr-tb"
+            cols: 2 
+            Button:        
+                text: 'Hello 1'
+                size_hint: 1,1
+            Button:
+                text: 'World 1'
+                size_hint: 1,1
+            Button:
+                text: 'Hello 2'
+                size_hint: 1,1
+            Button:        
+                text: 'World 2'
+                size_hint: 1,1
+            Button:        
+                text: 'Hello 1'
+                size_hint: 1,1
+            Button:
+                text: 'World 1'
+                size_hint: 1,1
+            Button:
+                text: 'Hello 2'
+                size_hint: 1,1
+            Button:        
+                text: 'World 2'
+                size_hint: 1,1
         
     

@@ -8,7 +8,7 @@ translator.set_locale('de')
 
 class ZequentMavLinkApp(MDApp):
     def build(self):
-        self.theme_cls.primary_palette = "Orange"
+        #self.theme_cls.primary_palette = "Red"
         self.theme_cls.theme_style = "Dark"
         pass
     def get_welcome_text(self):
