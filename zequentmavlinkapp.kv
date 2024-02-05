@@ -1,8 +1,9 @@
-MDBoxLayout:
+ZequentMDBoxLayout:
+
+<ZequentMDBoxLayout@MDBoxLayout>:
     orientation: "vertical"
     MDTopAppBar:
         title: ""
-        #md_bg_color: app.theme_cls.accent_color
         right_action_items:
             [
             ["home", lambda x: app.callback(x), "", "Home"],
@@ -17,8 +18,14 @@ MDBoxLayout:
             ]
         mode: "end"
 
-    MDLabel:
-        text: app.get_welcome_text()
-        halign: "center"
-        font_size: "100dp"
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint: 1,0.1
+        Button:
+            text: app.get_welcome_text()
+            halign: "center"
+        Button:
+            text: app.get_welcome_text()
+            halign: "center"
         
+    
