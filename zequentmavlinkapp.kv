@@ -1,8 +1,12 @@
 ZequentMDBoxLayout:
 
 <ZequentMDBoxLayout@MDBoxLayout>:
+    #md_bg_color: theme_cls.primary_palette
+    
     orientation: "vertical"
     MDTopAppBar:
+        md_bg_color: app.colors['Gold-primary']
+        specific_text_color: app.colors['Black-primary']
         title: "---"
         right_action_items:
             [
@@ -17,47 +21,35 @@ ZequentMDBoxLayout:
             ["zequent_logo.png", lambda x: app.callback_1()]
             ]
         mode: "end"
-        md_bg_color: [1,0.398,0.796,1]
+        #md_bg_color: app.theme_cls.primary_palette
     MDBoxLayout:
         orientation: "horizontal"
         size_hint: 1,0.1
-        md_bg_color: [1,0.398,0.796,1]
-        Button:
+        #md_bg_color: [1,0.398,0.796,1]
+        ZequentButton:
             text: app.get_welcome_text()
             halign: "center"
-        Button:
+        ZequentButton:
             text: app.get_welcome_text()
             halign: "center"
-            background_color: [1,0.398,0.796,1]
     ScrollView:
         do_scroll_y: True
         MDGridLayout:
             size_hint_y: None
             orientation: "lr-tb"
             cols: 2 
-            Button:        
+            ZequentButton:        
                 text: 'Hello 1'
-                size_hint: 1,1
-            Button:
+            ZequentButton:
                 text: 'World 1'
-                size_hint: 1,1
-            Button:
-                text: 'Hello 2'
-                size_hint: 1,1
-            Button:        
-                text: 'World 2'
-                size_hint: 1,1
-            Button:        
-                text: 'Hello 1'
-                size_hint: 1,1
-            Button:
-                text: 'World 1'
-                size_hint: 1,1
-            Button:
-                text: 'Hello 2'
-                size_hint: 1,1
-            Button:        
-                text: 'World 2'
-                size_hint: 1,1
         
-    
+
+#### CUSTOM WIDGETS
+
+##BUTTON
+<ZequentButton@Button>
+    background_normal: ''
+    background_color: app.colors["Gold-secondary"]
+    on_press: self.background_color = app.colors["Jewel-primary"]
+    on_release: self.background_color = app.colors["Gold-secondary"]
+    #background_down: DEFINE WITH IMAGE

@@ -1,16 +1,21 @@
 import tools.i18n as i18n
-import kivy
 from kivymd.app import MDApp
 
 translator = i18n.Translator('tools/localization/')
 translator.set_locale('de')
 
 
+
 class ZequentMavLinkApp(MDApp):
+    colors = {
+        "Black-primary": [0,0,0,0.9],
+        "Gold-primary": [0.78,0.56,0.05,1],
+        "Gold-secondary": [0.78,0.56,0.05,0.5],
+        "Jewel-primary": [0.00392, 0.14117, 0.3607]
+    }
+    
     def build(self):
-        #self.theme_cls.primary_palette = "Red"
         self.theme_cls.theme_style = "Dark"
-        pass
     def get_welcome_text(self):
         return translator.translate('welcome')
     def callback(self,x):
