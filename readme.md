@@ -1,5 +1,7 @@
 Moinsen.
 
+# APK Creation
+
 1. Buildozer installieren:
 pip3 install buildozer
 
@@ -11,3 +13,10 @@ buildozer init
 4. Um eine APK zu erstellen und laufen zu lassen (Android studio mit laufenden Virtual Android Device):
 buildozer android debug deploy run
 
+5. Die APK befindet sich im Python-Root Ordner "bin"
+
+
+# Troubleshooting - APK Creation
+
+1. Cython OS und pip3 basierend installieren
+pip3 install cython && sudo apt-get install  cython3
