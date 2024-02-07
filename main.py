@@ -8,7 +8,8 @@ translator.set_locale('de')
 
 class ZequentMavLinkApp(MDApp):
     toolBarTitle = "MavLink"
-    
+    connected = False
+
     colors = {
         "Black-primary": [0,0,0,0.9],
         "Gold-primary": [0.78,0.56,0.05,1],
