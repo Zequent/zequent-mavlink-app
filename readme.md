@@ -18,18 +18,18 @@ chmod 777 ./init_packages.sh
 pip3 install buildozer
 ```
 
-2. Im Root Folder des projektes folgendes eingeben:
+2. Hit command in root folder of zequent-mavlink-app <span style="color:red">(CAUTION!!! ONLY IF 'buildozer.spec' isn't in project-root folder!!!)</span>:
 ```shell
 buildozer init
 ```
 
-3. Jetzt wurde eine buildozer.spec erstellt, die dementsprechend angepasst werden MUSS! (Requirements-Kommasepariert[WIE IN DER REQUIREMENTS.TXT!!!], Version, Icon, Package,....)
+3. Now you created "buildozer.spec", you have to configure it if it isn't (Requirements-commaseperated [LIKE IN 'REQUIREMENTS.TXT'!!!], Version, Icon, Package,....)
 
-4. Um eine APK zu erstellen und laufen zu lassen (Android studio mit laufenden Virtual Android Device):
+4. To crate a ".apk" and run on VAD (Virtual Android Device):
 ```shell
 buildozer android debug deploy run
 ```
-5. Die APK befindet sich im Python-Root Ordner "bin"
+5. You'll find the ".apk" in project-root folder "bin"
 
 
 # Troubleshooting - APK Creation

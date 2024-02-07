@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = My Application
+title = MavLink
 
 # (str) Package name
-package.name = myapp
+package.name = zequent
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = org.zequent
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -28,12 +28,8 @@ source.include_exts = py,png,jpg,kv,atlas
 # Do not prefix with './'
 #source.exclude_patterns = license,images/*/*.jpg
 
-# (str) Application versioning (method 1)
+# (str) Application versioning 
 version = 0.1
-
-# (str) Application versioning (method 2)
-# version.regex = __version__ = ['"](.*)['"]
-# version.filename = %(source.dir)s/main.py
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
@@ -47,7 +43,7 @@ requirements = python3,kivy,babel,pyyaml,kivymd==1.0.1,pillow
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+icon.filename = ./static/images/logo_modified.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
@@ -61,7 +57,7 @@ orientation = landscape
 #
 
 #
-# author = © Copyright Info
+# author = © Mina Gallab
 
 # change the major version of python used by the app
 osx.python_version = 3
@@ -74,14 +70,14 @@ osx.kivy_version = 1.9.1
 #
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 0
+fullscreen = 1
 
 # (string) Presplash background color (for android toolchain)
 # Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
 # red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
 # darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
 # olive, purple, silver, teal.
-#android.presplash_color = #FFFFFF
+android.presplash_color = #C9910D
 
 # (string) Presplash animation using Lottie format.
 # see https://lottiefiles.com/ for examples and https://airbnb.design/lottie/
