@@ -1,16 +1,14 @@
 import tools.i18n as i18n
 from kivymd.app import MDApp
+from kivymd.uix.menu import MDDropdownMenu
 from kivy.properties import BooleanProperty
-from kivymd.uix.boxlayout import MDBoxLayout
+from kivy.uix.dropdown import DropDown
 from kivy.clock import Clock
 from functools import partial
+import tools.customWidgets as customWidgets
 
 translator = i18n.Translator('tools/localization/')
 translator.set_locale('de')
-
-class MainControllerLayout(MDBoxLayout):
-    pass
-
 
 class ZequentMavLinkApp(MDApp):
     toolBarTitle = "MavLink"
@@ -61,7 +59,18 @@ class ZequentMavLinkApp(MDApp):
             button.disabled = True
             currStateLabel.text = translator.translate('success_message')
             currStateLabel.color = self.colors["Success"]
-            Clock.schedule_once(partial(self.setNewScreen, MainControllerLayout()), 3)
+            Clock.schedule_once(partial(self.setNewScreen, customWidgets.MainControllerLayout()), 3)
+    
+    def openDropDown(self,topBar):
+        menu_items = [
+            {
+                "text": f"{i}",
+                "on_release": lambda x=f"Item {i}": self.menu_callback(x),
+            } for i in range(5)
+        ]
+        MDDropdownMenu(caller=topBar, items=menu_items).open()
+    def menu_callback(self, text_item):
+        print(str(text_item))
 
 if __name__ == '__main__':
     ZequentMavLinkApp().run()

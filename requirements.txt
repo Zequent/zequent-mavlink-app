@@ -1,5 +1,5 @@
 kivy==2.3.0
-kivymd==1.0.1
+kivymd==1.2.0
 pyyaml==6.0.1
 babel==2.8.0
 buildozer==1.5.0

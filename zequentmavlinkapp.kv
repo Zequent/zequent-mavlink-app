@@ -13,13 +13,20 @@ ZequentRootLayout:
         
 <MainControllerLayout>:
     orientation: "vertical"
+    MDDropDownItem:
+        pos_hint: {"center_x": .5, "center_y": .5}
+        on_release: app.openDropDown(self)
+
+        MDDropDownItemText:
+            id: drop_text
+            text: "Item"
     MDTopAppBar:
         md_bg_color: app.colors['Gold-primary']
         specific_text_color: app.colors['Black-primary']
         title: app.toolBarTitle
         left_action_items: 
             [
-            ["menu", lambda x: app.callback_1()]
+            ["menu", lambda x: app.openDropDown(self)]
             ]
         right_action_items:
             [
