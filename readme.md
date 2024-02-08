@@ -38,3 +38,14 @@ buildozer android debug deploy run
 ```shell
 pip3 install cython && sudo apt-get install  cython3
 ```
+
+
+# TRYING KIVYMD 2.0.1DEV
+```shell
+pip install https://github.com/kivymd/KivyMD/archive/master.zip
+```
+
+# GOING BACK
+```shell
+pip install kivymd==1.2.0
+```
