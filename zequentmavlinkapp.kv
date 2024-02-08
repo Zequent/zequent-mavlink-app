@@ -2,14 +2,14 @@ ZequentRootLayout:
 
 <ZequentRootLayout@MDBoxLayout>
     orientation: "vertical"
-    Label:
+    ZequentConnectionType:
+        id: connection_type
+    ZequentLabel:
         id: connection_status_label
         text: app.getConnectionStatusText()
-        font_size: "50dp"
     ZequentButton:
         text: 'Connect'
-        on_press: app.tryConnection(self)
-        font_size: "50dp"  
+        on_press: app.tryConnection(self, connection_type)
         
 <MainControllerLayout>:
     orientation: "vertical"
@@ -50,14 +50,42 @@ ZequentRootLayout:
                 text: 'Hello 1'
             ZequentButton:
                 text: 'World 1'
-        
+
+<ZequentConnectionType@MDBoxLayout>:
+    orientation: "vertical"
+    size_hint: 1, 0.3
+    ZequentButton:
+        id: rfc_button
+        text: 'RFC'
+        disabled: not lte_button.disabled 
+        on_press: self.disabled = True
+        font_size: "40dp"
+    MDBoxLayout: 
+        ZequentButton:
+            id: lte_button
+            text: 'LTE'
+            disabled: not rfc_button.disabled
+            on_press: self.disabled = True
+            font_size: "40dp"
+        ZequentSingleTextInput:
+            id: lte_address
+            disabled: not rfc_button.disabled
+            font_size: "40dp"
 
 #### CUSTOM WIDGETS
 
 ##BUTTON
 <ZequentButton@Button>
+    font_size: "40dp"
     background_normal: ''
     background_color: app.colors["Gold-secondary"]
     on_press: self.background_color = app.colors["Jewel-primary"]
     on_release: self.background_color = app.colors["Gold-secondary"]
     #background_down: DEFINE WITH IMAGE
+
+<ZequentLabel@Label>
+    font_size: "50dp"
+    color: app.colors["Gold-primary"]
+
+<ZequentSingleTextInput@TextInput>
+    multiline: False
