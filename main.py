@@ -35,7 +35,7 @@ class ZequentMavLinkApp(MDApp):
     def getConnectionStatusText(self):
         return translator.translate('not_connected')
     
-    def clearChildren(self,*args):
+    def setNewScreen(self,*args):
         self.root.clear_widgets()
         self.root.add_widget(args[0])
 
@@ -47,14 +47,9 @@ class ZequentMavLinkApp(MDApp):
         if randInt is 0:
             currStateLabel.text = translator.translate('failed_message')
         else:
-            import time
             button.disabled = True
             currStateLabel.text = translator.translate('success_message')
-            Clock.schedule_once(partial(self.clearChildren, MainControllerLayout()), 3)
-            
-
-        
-        
+            Clock.schedule_once(partial(self.setNewScreen, MainControllerLayout()), 3)
 
 if __name__ == '__main__':
     ZequentMavLinkApp().run()

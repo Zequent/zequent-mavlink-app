@@ -5,9 +5,11 @@ ZequentRootLayout:
     Label:
         id: connection_status_label
         text: app.getConnectionStatusText()
+        font_size: "50dp"
     ZequentButton:
         text: 'Connect'
-        on_press: app.tryConnection(self)  
+        on_press: app.tryConnection(self)
+        font_size: "50dp"  
         
 <MainControllerLayout>:
     orientation: "vertical"
