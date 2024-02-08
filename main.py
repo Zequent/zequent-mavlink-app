@@ -1,14 +1,21 @@
 import tools.i18n as i18n
 from kivymd.app import MDApp
+from kivy.properties import BooleanProperty
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivy.clock import Clock
+from functools import partial
 
 translator = i18n.Translator('tools/localization/')
 translator.set_locale('de')
 
+class MainControllerLayout(MDBoxLayout):
+    pass
 
 
 class ZequentMavLinkApp(MDApp):
     toolBarTitle = "MavLink"
     connected = False
+    isMainLayoutShown = BooleanProperty(False)
 
     colors = {
         "Black-primary": [0,0,0,0.9],
@@ -23,6 +30,30 @@ class ZequentMavLinkApp(MDApp):
         return translator.translate('welcome')
     def callback(self,x):
         print(x)
+
+    ######ZequentConnectLayout#######
+    def getConnectionStatusText(self):
+        return translator.translate('not_connected')
+    
+    def clearChildren(self,*args):
+        self.root.clear_widgets()
+        self.root.add_widget(args[0])
+
+    def tryConnection(self,button):
+        import random
+        randInt = random.randint(0,1)
+        currStateLabel = self.root.ids.connection_status_label
+        
+        if randInt is 0:
+            currStateLabel.text = translator.translate('failed_message')
+        else:
+            import time
+            button.disabled = True
+            currStateLabel.text = translator.translate('success_message')
+            Clock.schedule_once(partial(self.clearChildren, MainControllerLayout()), 3)
+            
+
+        
         
 
 if __name__ == '__main__':

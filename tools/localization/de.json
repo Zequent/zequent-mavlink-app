@@ -1,3 +1,6 @@
 {
-    "welcome": "Willkommen, $name! "
+    "welcome": "Willkommen, $name!",
+    "not_connected": "Nicht verbunden!",
+    "success_message": "Erfolgreich!",
+    "failed_message": "Fehlgeschlagen!"
 }

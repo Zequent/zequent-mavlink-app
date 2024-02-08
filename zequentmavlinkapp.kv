@@ -1,6 +1,15 @@
-ZequentMDBoxLayout:
+ZequentRootLayout:
 
-<ZequentMDBoxLayout@MDBoxLayout>:
+<ZequentRootLayout@MDBoxLayout>
+    orientation: "vertical"
+    Label:
+        id: connection_status_label
+        text: app.getConnectionStatusText()
+    ZequentButton:
+        text: 'Connect'
+        on_press: app.tryConnection(self)  
+        
+<MainControllerLayout>:
     orientation: "vertical"
     MDTopAppBar:
         md_bg_color: app.colors['Gold-primary']
@@ -37,12 +46,7 @@ ZequentMDBoxLayout:
             cols: 2 
             ZequentButton:        
                 text: 'Hello 1'
-            ZequentButton:colors = {
-        "Black-primary": [0,0,0,0.9],
-        "Gold-primary": [0.78,0.56,0.05,1],
-        "Gold-secondary": [0.78,0.56,0.05,0.5],
-        "Jewel-primary": [0.00392, 0.14117, 0.3607]
-    }
+            ZequentButton:
                 text: 'World 1'
         
 
@@ -50,12 +54,7 @@ ZequentMDBoxLayout:
 
 ##BUTTON
 <ZequentButton@Button>
-    background_normal: ''colors = {
-        "Black-primary": [0,0,0,0.9],
-        "Gold-primary": [0.78,0.56,0.05,1],
-        "Gold-secondary": [0.78,0.56,0.05,0.5],
-        "Jewel-primary": [0.00392, 0.14117, 0.3607]
-    }
+    background_normal: ''
     background_color: app.colors["Gold-secondary"]
     on_press: self.background_color = app.colors["Jewel-primary"]
     on_release: self.background_color = app.colors["Gold-secondary"]
