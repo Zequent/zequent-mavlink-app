@@ -23,11 +23,11 @@ ZequentRootLayout:
             ]
         right_action_items:
             [
-            ["home", lambda x: app.callback(x), "", "Home"],
-            ["message-star", lambda x: app.callback(x), "", "Message star"],
-            ["message-question", lambda x: app.callback(x), "" , "Message question"],
-            ["message-reply", lambda x: app.callback(x), "", "Message reply"],
-            ["country", lambda x: app.openDropDownLanguageSelection(self)]
+            #["home", lambda x: app.callback(x), "", "Home"],
+            #["message-star", lambda x: app.callback(x), "", "Message star"],
+            #["message-question", lambda x: app.callback(x), "" , "Message question"],
+            #["message-reply", lambda x: app.callback(x), "", "Message reply"],
+            ["./static/icons/language_selection.png", lambda x: app.openDropDownLanguageSelection(self)]
             ]
         mode: "end"
         #md_bg_color: app.theme_cls.primary_palette
@@ -85,7 +85,7 @@ ZequentRootLayout:
     #background_down: DEFINE WITH IMAGE
 
 <ZequentLabel@Label>
-    font_size: "50dp"
+    font_size: "40dp"
     color: app.colors["Gold-primary"]
 
 <ZequentSingleTextInput@TextInput>

@@ -1,8 +1,6 @@
 import tools.i18n as i18n
 from kivymd.app import MDApp
 from kivymd.uix.menu import MDDropdownMenu
-from kivy.properties import BooleanProperty
-from kivy.uix.dropdown import DropDown
 from kivy.clock import Clock
 from functools import partial
 import tools.customWidgets as customWidgets
@@ -88,6 +86,7 @@ class ZequentMavLinkApp(MDApp):
             {
                 "text": f"Item {i}",
                 "on_release": lambda x=f"Item {i}": self.menu_callback(x),
+                "font_size": "50dp"
             } for i in range(5)
         ]
 
@@ -112,7 +111,8 @@ class ZequentMavLinkApp(MDApp):
             filename = filename.split('.json')[0]
             currLanguageDropDownItem = {
                 "text": filename,
-                "on_release": lambda x=filename: self.setLanguage(x)
+                "font_size": "40dp",
+                "on_release": lambda x=filename: self.setLanguage(x),
             }
             availableLanguages.append(currLanguageDropDownItem)
         
