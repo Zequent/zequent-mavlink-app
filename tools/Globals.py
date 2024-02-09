@@ -1,0 +1,1 @@
+settingsFile = './tools/settings/settings.json' 

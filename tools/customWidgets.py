@@ -6,3 +6,6 @@ class ZequentButton(Button):
 
 class MainControllerLayout(MDBoxLayout):
     pass
+
+class ZequentRootLayout(MDBoxLayout):
+    pass

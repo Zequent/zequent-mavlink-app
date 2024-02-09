@@ -7,7 +7,7 @@ ZequentRootLayout:
         specific_text_color: app.colors['Black-primary']
         right_action_items:
             [
-            ["./static/icons/language_selection.png", lambda x: app.openDropDownLanguageSelectionTest(self)]
+            ["./static/icons/language_selection.png", lambda x: app.changeLanguageOnStart(self)]
             ]
         mode: "end"
     ZequentConnectionType:
@@ -18,7 +18,7 @@ ZequentRootLayout:
     ZequentButton:
         text: 'Connect'
         on_press: app.tryConnection(self, connection_type)
-        
+    
 <MainControllerLayout>:
     orientation: "vertical"
     MDTopAppBar:

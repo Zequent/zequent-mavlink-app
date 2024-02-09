@@ -4,14 +4,25 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivy.clock import Clock
 from functools import partial
 import tools.customWidgets as customWidgets
+import json
+import tools.Globals as Globals
+
+def getDefaultSettings():
+    with open(Globals.settingsFile) as infile:
+        data = json.load(infile)
+    return data["lastUsedLanguage"] 
+
+##Localization
+translator = i18n.Translator('tools/localization/')
+translator.set_locale(getDefaultSettings())
 
 
-
+    
 
 class ZequentMavLinkApp(MDApp):
-    ##Localization
-    translator = i18n.Translator('tools/localization/')
-    translator.set_locale('de')
+
+
+    
 
     toolBarTitle = "MavLink"
     ##Custom ColorPlaette
@@ -29,11 +40,16 @@ class ZequentMavLinkApp(MDApp):
     
     #Startpoint
     def build(self):
+        self.setInitVariables()
         self.theme_cls.theme_style = "Dark"
+
+    def setInitVariables(self, *args):
+        self.setNewScreen(customWidgets.ZequentRootLayout())
+        
 
     ######Globals Start#######
     def get_welcome_text(self):
-        return self.translator.translate('welcome')
+        return translator.translate('welcome')
     
     def callback(self,x):
         print(x)
@@ -64,11 +80,11 @@ class ZequentMavLinkApp(MDApp):
             lteAddress=connectionType.ids.lte_address
             print("LTE adress:"+str(lteAddress.text))
         if randInt is 0:
-            currStateLabel.text = self.translator.translate('failed_message')
+            currStateLabel.text = translator.translate('failed_message')
             currStateLabel.color = self.colors["Failure"]
         else:
             button.disabled = True
-            currStateLabel.text = self.translator.translate('success_message')
+            currStateLabel.text = translator.translate('success_message')
             currStateLabel.color = self.colors["Success"]
             Clock.schedule_once(partial(self.setNewScreen, customWidgets.MainControllerLayout()), 3)
     ######ZequentRootLayout End#######
@@ -76,7 +92,7 @@ class ZequentMavLinkApp(MDApp):
 
     ######ZequentConnectLayout Start#######
     def getConnectionStatusText(self):
-        return self.translator.translate('not_connected')
+        return translator.translate('not_connected')
     
     def openDropDownSettings(self,topBar):
         menu_items = self.getDropDownItemsSettings()
@@ -125,22 +141,27 @@ class ZequentMavLinkApp(MDApp):
         return availableLanguages
     
     ###TODO: Test refresh
-    def openDropDownLanguageSelectionTest(self, topBar):
-        tempWidgets=[]
-        
-        for widget in self.root.children:
-            tempWidgets.append(widget)
-        self.translator.set_locale('en')
-        self.root.clear_widgets()
-        tempWidgets.reverse()
-        for widget in tempWidgets:
-            self.root.add_widget(widget)
+    def changeLanguageOnStart(self, topBar):
+        menu_items = self.getDropDownItemsLanguage()
+        mdDropDown = MDDropdownMenu()
+        mdDropDown.caller=topBar
+        mdDropDown.items=menu_items
+        mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
+        mdDropDown.open()
     
     def setLanguage(self, language):
-        self.translator.set_locale(language)
-        self.setNewScreen(customWidgets.MainControllerLayout())
+        translator.set_locale(language)
+        self.saveInSettings(language)
+        self.setNewScreen(customWidgets.ZequentRootLayout())
     
-
+    def saveInSettings(self, language):
+        with open(Globals.settingsFile) as infile:
+            data = json.load(infile)
+        data["lastUsedLanguage"] = language
+        with open(Globals.settingsFile, 'w') as outfile:
+            json.dump(data, outfile)
+    
+    
     def menu_callback(self, text_item):
         print(str(text_item))
     ######ZequentConnectLayout End#######
