@@ -44,6 +44,12 @@ class ZequentMavLinkApp(MDApp):
         self.root.clear_widgets()
         self.root.add_widget(args[0])
 
+    ##TODO get current Children and refresh current screen!!!## 
+    def refreshScreen(self,*args):
+        tmpRoot = self.root
+        self.root.clear_widgets()
+        self.root = tmpRoot
+
     ######ZequentRootLayout Start#######
     ##Connect to Vehicle
     def tryConnection(self,button, connectionType):
