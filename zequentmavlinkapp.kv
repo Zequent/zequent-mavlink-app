@@ -2,6 +2,14 @@ ZequentRootLayout:
 
 <ZequentRootLayout@MDBoxLayout>
     orientation: "vertical"
+    MDTopAppBar:
+        md_bg_color: app.colors['Gold-primary']
+        specific_text_color: app.colors['Black-primary']
+        right_action_items:
+            [
+            ["./static/icons/language_selection.png", lambda x: app.openDropDownLanguageSelectionTest(self)]
+            ]
+        mode: "end"
     ZequentConnectionType:
         id: connection_type
     ZequentLabel:
@@ -41,6 +49,8 @@ ZequentRootLayout:
         ZequentButton:
             text: app.get_welcome_text()
             halign: "center"
+    ZequentCameraSection:
+
     ScrollView:
         do_scroll_y: True
         MDGridLayout:
@@ -73,15 +83,40 @@ ZequentRootLayout:
             disabled: not rfc_button.disabled
             font_size: "40dp"
 
+
+<ZequentCameraSection@MDBoxLayout>
+    id:camera_layout
+    orientation: "horizontal"  
+    columns: 2
+    Camera:
+        id: camera
+        resolution: (1920, 1080)
+        play: camera_switch.active
+    MDBoxLayout:
+        orientation: "horizontal"
+        columns: 2
+        Label:
+            text: 'Camera status'
+        Switch:
+            id: camera_switch
+            active: False
 #### CUSTOM WIDGETS
 
 ##BUTTON
-<ZequentButton@Button>
+<ZequentButton@MDButton>
     font_size: "40dp"
+    style: "filled"
     background_normal: ''
-    background_color: app.colors["Gold-secondary"]
-    on_press: self.background_color = app.colors["Jewel-primary"]
-    on_release: self.background_color = app.colors["Gold-secondary"]
+    background_color:  (0, 0,0,0)
+    canvas.before:
+        Color:
+            rgba: app.colors["Gold-secondary"]
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [40]
+    #on_press: self.background_color = app.colors["Jewel-primary"]
+    #on_release: self.background_color = app.colors["Gold-secondary"]
     #background_down: DEFINE WITH IMAGE
 
 <ZequentLabel@Label>

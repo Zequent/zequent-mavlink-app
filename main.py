@@ -124,6 +124,18 @@ class ZequentMavLinkApp(MDApp):
         
         return availableLanguages
     
+    ###TODO: Test refresh
+    def openDropDownLanguageSelectionTest(self, topBar):
+        tempWidgets=[]
+        
+        for widget in self.root.children:
+            tempWidgets.append(widget)
+        self.translator.set_locale('en')
+        self.root.clear_widgets()
+        tempWidgets.reverse()
+        for widget in tempWidgets:
+            self.root.add_widget(widget)
+    
     def setLanguage(self, language):
         self.translator.set_locale(language)
         self.setNewScreen(customWidgets.MainControllerLayout())
