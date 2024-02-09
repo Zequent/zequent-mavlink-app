@@ -8,10 +8,13 @@ from functools import partial
 import tools.customWidgets as customWidgets
 
 
-translator = i18n.Translator('tools/localization/')
-translator.set_locale('de')
+
 
 class ZequentMavLinkApp(MDApp):
+    ##Localization
+    translator = i18n.Translator('tools/localization/')
+    translator.set_locale('de')
+
     toolBarTitle = "MavLink"
     ##Custom ColorPlaette
     colors = {
@@ -32,7 +35,7 @@ class ZequentMavLinkApp(MDApp):
 
     ######Globals Start#######
     def get_welcome_text(self):
-        return translator.translate('welcome')
+        return self.translator.translate('welcome')
     
     def callback(self,x):
         print(x)
@@ -46,6 +49,7 @@ class ZequentMavLinkApp(MDApp):
     ######ZequentRootLayout Start#######
     ##Connect to Vehicle
     def tryConnection(self,button, connectionType):
+        ###TODO: Define connect function with api###
         import random
         randInt = random.randint(0,1)
         currStateLabel = self.root.ids.connection_status_label
@@ -53,14 +57,14 @@ class ZequentMavLinkApp(MDApp):
         if connectionType.ids.rfc_button.disabled == False:
             print("RFC")
         elif connectionType.ids.lte_button.disabled == False:
-            address=connectionType.ids.lte_address
-            print("LTE adress:"+str(address.text))
+            lteAddress=connectionType.ids.lte_address
+            print("LTE adress:"+str(lteAddress.text))
         if randInt is 0:
-            currStateLabel.text = translator.translate('failed_message')
+            currStateLabel.text = self.translator.translate('failed_message')
             currStateLabel.color = self.colors["Failure"]
         else:
             button.disabled = True
-            currStateLabel.text = translator.translate('success_message')
+            currStateLabel.text = self.translator.translate('success_message')
             currStateLabel.color = self.colors["Success"]
             Clock.schedule_once(partial(self.setNewScreen, customWidgets.MainControllerLayout()), 3)
     ######ZequentRootLayout End#######
@@ -68,17 +72,57 @@ class ZequentMavLinkApp(MDApp):
 
     ######ZequentConnectLayout Start#######
     def getConnectionStatusText(self):
-        return translator.translate('not_connected')
+        return self.translator.translate('not_connected')
     
-    
-    def openDropDown(self,topBar):
-        menu_items = [
+    def openDropDownSettings(self,topBar):
+        menu_items = self.getDropDownItemsSettings()
+        mdDropDown = MDDropdownMenu()
+        mdDropDown.caller=topBar
+        mdDropDown.items=menu_items
+        mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
+        mdDropDown.open()
+
+    def getDropDownItemsSettings(self):
+        ###TODO: DEFINE AVAILABLE FUNCTIONS###
+        return [
             {
-                "text": f"{i}",
+                "text": f"Item {i}",
                 "on_release": lambda x=f"Item {i}": self.menu_callback(x),
             } for i in range(5)
         ]
-        MDDropdownMenu(caller=topBar, items=menu_items).open()
+
+    def openDropDownLanguageSelection(self,topBar):
+        menu_items = self.getDropDownItemsLanguage()
+        mdDropDown = MDDropdownMenu()
+        mdDropDown.caller=topBar
+        mdDropDown.items=menu_items
+        mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
+        mdDropDown.open()
+
+    def getDropDownItemsLanguage(self):
+        ###TODO: DEFINE AVAILABLE FUNCTIONS###
+        from os import walk
+
+        availableLanguages = []
+        for (dirpath, dirnames, filenames) in walk('tools/localization/'):
+            filenames = filenames
+            break
+
+        for filename in filenames:
+            filename = filename.split('.json')[0]
+            currLanguageDropDownItem = {
+                "text": filename,
+                "on_release": lambda x=filename: self.setLanguage(x)
+            }
+            availableLanguages.append(currLanguageDropDownItem)
+        
+        return availableLanguages
+    
+    def setLanguage(self, language):
+        self.translator.set_locale(language)
+        self.setNewScreen(customWidgets.MainControllerLayout())
+    
+
     def menu_callback(self, text_item):
         print(str(text_item))
     ######ZequentConnectLayout End#######

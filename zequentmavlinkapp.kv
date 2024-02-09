@@ -19,7 +19,7 @@ ZequentRootLayout:
         title: app.toolBarTitle
         left_action_items: 
             [
-            ["menu", lambda x: app.openDropDown(self)]
+            ["menu", lambda x: app.openDropDownSettings(self)]
             ]
         right_action_items:
             [
@@ -27,6 +27,7 @@ ZequentRootLayout:
             ["message-star", lambda x: app.callback(x), "", "Message star"],
             ["message-question", lambda x: app.callback(x), "" , "Message question"],
             ["message-reply", lambda x: app.callback(x), "", "Message reply"],
+            ["country", lambda x: app.openDropDownLanguageSelection(self)]
             ]
         mode: "end"
         #md_bg_color: app.theme_cls.primary_palette
