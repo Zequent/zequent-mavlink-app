@@ -6,6 +6,7 @@ from functools import partial
 import tools.customWidgets as customWidgets
 import json
 import tools.Globals as Globals
+from kivy_garden.mapview import MapView, MapMarker, MapSource
 
 def getDefaultSettings():
     with open(Globals.settingsFile) as infile:
