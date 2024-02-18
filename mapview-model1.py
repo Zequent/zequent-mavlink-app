@@ -1,7 +1,6 @@
 from kivy_garden.mapview import MapView, MapMarker, MapSource
 from kivy.app import App
 
-
 class MapviewTest(App):
     def build(self):
         apiKey = 'c7b23514f42f4878b7a8397f7ecfdef5'

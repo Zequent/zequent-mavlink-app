@@ -5,3 +5,5 @@ babel==2.8.0
 buildozer==1.5.0
 Cython==3.0.8
 Pillow==9.0.1
+kivy_garden
+kivy-garden.mapview
