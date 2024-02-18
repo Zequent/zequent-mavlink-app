@@ -8,6 +8,10 @@ import json
 import tools.Globals as Globals
 from kivy_garden.mapview import MapView, MapMarker, MapSource
 
+import geocoder
+currentGeocoder = geocoder.ip('me')
+latitude, longitude = currentGeocoder.latlng
+
 def getDefaultSettings():
     with open(Globals.settingsFile) as infile:
         data = json.load(infile)
@@ -42,6 +46,7 @@ class ZequentMavLinkApp(MDApp):
     #Startpoint
     def build(self):
         self.setInitVariables()
+        self.setMap()
         self.theme_cls.theme_style = "Dark"
 
     def setInitVariables(self, *args):
@@ -88,6 +93,22 @@ class ZequentMavLinkApp(MDApp):
             currStateLabel.text = translator.translate('success_message')
             currStateLabel.color = self.colors["Success"]
             Clock.schedule_once(partial(self.setNewScreen, customWidgets.MainControllerLayout()), 3)
+    
+    
+    def setMap(self):
+        currLat =  latitude
+        currLon = longitude
+        mapview = MapView(zoom=20, lat=currLat, lon=currLon)
+
+        apiKey = 'c7b23514f42f4878b7a8397f7ecfdef5'
+        source = MapSource(url='https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey='+apiKey,
+                           cache_key="thunderforest-map", tile_size=512,
+                           image_ext="png", attribution="@ThunderForest")
+        mapview.map_source.from_provider("thunderforest-cycle")
+        mapview.map_source = source
+
+        self.root.add_widget(mapview)
+    
     ######ZequentRootLayout End#######
 
 
