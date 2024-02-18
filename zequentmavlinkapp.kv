@@ -29,14 +29,6 @@ ZequentRootLayout:
             [
             ["menu", lambda x: app.openDropDownSettings(self)]
             ]
-        right_action_items:
-            [
-            #["home", lambda x: app.callback(x), "", "Home"],
-            #["message-star", lambda x: app.callback(x), "", "Message star"],
-            #["message-question", lambda x: app.callback(x), "" , "Message question"],
-            #["message-reply", lambda x: app.callback(x), "", "Message reply"],
-            ["./static/icons/language_selection.png", lambda x: app.openDropDownLanguageSelection(self)]
-            ]
         mode: "end"
         #md_bg_color: app.theme_cls.primary_palette
     MDBoxLayout:
@@ -49,7 +41,7 @@ ZequentRootLayout:
         ZequentButton:
             text: app.get_welcome_text()
             halign: "center"
-    ZequentCameraSection:
+    ZequentCameraLayout:
 
     ScrollView:
         do_scroll_y: True
@@ -84,14 +76,15 @@ ZequentRootLayout:
             font_size: "40dp"
 
 
-<ZequentCameraSection@MDBoxLayout>
+<ZequentCameraLayout>
     id:camera_layout
     orientation: "horizontal"  
-    columns: 2
+    columns: 3
     Camera:
         id: camera
         resolution: (1920, 1080)
         play: camera_switch.active
+    ZequentMapView:
     MDBoxLayout:
         orientation: "horizontal"
         columns: 2
@@ -125,3 +118,7 @@ ZequentRootLayout:
 
 <ZequentSingleTextInput@TextInput>
     multiline: False
+
+
+<ZequentMapView>
+    
