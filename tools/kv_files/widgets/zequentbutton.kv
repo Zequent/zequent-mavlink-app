@@ -1,0 +1,15 @@
+<ZequentButton@MDButton>
+    font_size: "40dp"
+    style: "filled"
+    background_normal: ''
+    background_color:  (0, 0,0,0)
+    canvas.before:
+        Color:
+            rgba: app.customColors["second"]
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [40]
+    #on_press: self.background_color = app.customColors["fourth"]
+    #on_release: self.background_color = app.customColors["second"]
+    #background_down: DEFINE WITH IMAGE

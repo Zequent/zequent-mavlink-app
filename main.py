@@ -6,123 +6,87 @@ from functools import partial
 import tools.customWidgets as customWidgets
 import json
 import tools.Globals as Globals
-
-def getDefaultSettings():
-    with open(Globals.settingsFile) as infile:
-        data = json.load(infile)
-    return data["lastUsedLanguage"] 
+from kivy.lang import Builder
+from kivy.metrics import dp
 
 ##Localization
 translator = i18n.Translator('tools/localization/')
-translator.set_locale(getDefaultSettings())
-
 
     
 
 class ZequentMavLinkApp(MDApp):
 
-
-    
-
-    toolBarTitle = "MavLink"
-    ##Custom ColorPlaette
-    colors = {
-        "Black-primary": [0,0,0,0.9],
-        "Gold-primary": [0.78,0.56,0.05,1],
-        "Gold-secondary": [0.78,0.56,0.05,0.5],
-        "Jewel-primary": [0.00392, 0.14117, 0.3607],
-        "Success": [0,1,0,1],
-        "Failure": [1,0,0,1],
+    customColors = {
+        #Gold
+        "first": [0.78,0.56,0.05,1],
+        #Gold-secondary
+        "second": [0.78,0.56,0.05,0.5],
+        #Black
+        "black": [0,0,0,0.9],
+        #Jewel-primary
+        "fourth": [0.00392, 0.14117, 0.3607],
+        "success": [0,1,0,1],
+        "failure": [1,0,0,1]
     }
 
-    #connection status variable of return value from API
+    fontSizes = {
+        #Big
+        "primary": dp(40),
+
+        #Medium
+        "secondary": dp(30),
+
+        #small
+        "tertiary": dp(20)
+    }
+
+    toolBarTitle = "MavLink"
+
     connected = False
-    
-    #Startpoint
-    def build(self):
-        self.setInitVariables()
+
+    def __init__(self, **kwargs):
+        self.title = "My Material Application"
+        super().__init__(**kwargs)
         self.theme_cls.theme_style = "Dark"
+        self.importPY_FILES()
+        self.importKV_FILES()
 
-    def setInitVariables(self, *args):
-        self.setNewScreen(customWidgets.ZequentRootLayout())
-        
+    def build(self):
+        pass
 
-    ######Globals Start#######
+    ###IMPORT ALL PY_FILES
+    def importPY_FILES(self):
+        import glob
+        import importlib.util
+        for filename in glob.iglob('tools/py_files/' + '**/**.py', recursive=True):
+            filename = filename.replace("/",".")
+            filename = filename[:-3]
+            if "__pycache__" not in filename:
+                importlib.import_module(filename)
+
+
+    ###IMPORT ALL KV_FILES
+    def importKV_FILES(self):
+        import os
+        for currDirName, dirnames, filenames in os.walk('./tools/kv_files'):
+            for filename in filenames:
+                Builder.load_file(os.path.join(currDirName, filename)) 
+
     def get_welcome_text(self):
         return translator.translate('welcome')
     
     def callback(self,x):
         print(x)
-    ######Globals End#######
         
-    ##Start new Root Screen
-    def setNewScreen(self,*args):
-        self.root.clear_widgets()
-        self.root.add_widget(args[0])
+    ##Change Screen
+    def changeScreen(self,*args):
+        self.root.ids.sm.current = args[0]
 
-    ##TODO get current Children and refresh current screen!!!## 
-    def refreshScreen(self,*args):
-        tmpRoot = self.root
-        self.root.clear_widgets()
-        self.root = tmpRoot
+    def open_language_dropdown(self, item,sm):
+        menu_items = self.getLanguageDropDownItems(sm)
+        MDDropdownMenu(caller=item, items=menu_items).open()
 
-    ######ZequentRootLayout Start#######
-    ##Connect to Vehicle
-    def tryConnection(self,button, connectionType):
-        ###TODO: Define connect function with api###
-        import random
-        randInt = random.randint(0,1)
-        currStateLabel = self.root.ids.connection_status_label
-        
-        if connectionType.ids.rfc_button.disabled == False:
-            print("RFC")
-        elif connectionType.ids.lte_button.disabled == False:
-            lteAddress=connectionType.ids.lte_address
-            print("LTE adress:"+str(lteAddress.text))
-        if randInt is 0:
-            currStateLabel.text = translator.translate('failed_message')
-            currStateLabel.color = self.colors["Failure"]
-        else:
-            button.disabled = True
-            currStateLabel.text = translator.translate('success_message')
-            currStateLabel.color = self.colors["Success"]
-            Clock.schedule_once(partial(self.setNewScreen, customWidgets.MainControllerLayout()), 3)
-    
-    ######ZequentRootLayout End#######
-
-
-    ######ZequentConnectLayout Start#######
-    def getConnectionStatusText(self):
-        return translator.translate('not_connected')
-    
-    def openDropDownSettings(self,topBar):
-        menu_items = self.getDropDownItemsSettings()
-        mdDropDown = MDDropdownMenu()
-        mdDropDown.caller=topBar
-        mdDropDown.items=menu_items
-        mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
-        mdDropDown.open()
-
-    def getDropDownItemsSettings(self):
-        ###TODO: DEFINE AVAILABLE FUNCTIONS###
-        return [
-            {
-                "text": f"Item {i}",
-                "on_release": lambda x=f"Item {i}": self.menu_callback(x),
-                "font_size": "50dp"
-            } for i in range(5)
-        ]
-
-    def openDropDownLanguageSelection(self,topBar):
-        menu_items = self.getDropDownItemsLanguage()
-        mdDropDown = MDDropdownMenu()
-        mdDropDown.caller=topBar
-        mdDropDown.items=menu_items
-        mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
-        mdDropDown.open()
-
-    def getDropDownItemsLanguage(self):
-        ###TODO: DEFINE AVAILABLE FUNCTIONS###
+    def getLanguageDropDownItems(self,sm):
         from os import walk
 
         availableLanguages = []
@@ -134,8 +98,8 @@ class ZequentMavLinkApp(MDApp):
             filename = filename.split('.json')[0]
             currLanguageDropDownItem = {
                 "text": filename,
-                "font_size": "40dp",
-                "on_release": lambda x=filename: self.setLanguage(x),
+                "font_size": self.fontSizes['primary'],
+                "on_release": lambda language=filename: self.setLanguage(language,sm),
             }
             availableLanguages.append(currLanguageDropDownItem)
         
@@ -150,10 +114,17 @@ class ZequentMavLinkApp(MDApp):
         mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
         mdDropDown.open()
     
-    def setLanguage(self, language):
+    def setLanguage(self, language,sm):
+        ###TODO CHANGE SCREEN
+        from kivy.uix.screenmanager import ScreenManager, Screen
         translator.set_locale(language)
         self.saveInSettings(language)
-        self.setNewScreen(customWidgets.ZequentRootLayout())
+        updateScreen = sm.get_screen(sm.current)
+        updateScreen.name = sm.current
+        sm.add_widget(updateScreen)
+        sm.remove_widget(sm.get_screen(sm.current))
+        sm.current = updateScreen.name
+        
     
     def saveInSettings(self, language):
         with open(Globals.settingsFile) as infile:

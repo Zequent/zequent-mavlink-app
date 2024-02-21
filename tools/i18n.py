@@ -6,6 +6,7 @@ import os
 import yaml
 from datetime import datetime
 from babel.dates import format_datetime
+import tools.Globals as Globals
 
 supported_format = ['json', 'yaml']
 
@@ -30,6 +31,12 @@ class Translator():
                     elif file_format == 'yaml':
                         self.data[loc] = yaml.safe_load(f)
 
+
+    def getDefaultSettings():
+        with open(Globals.settingsFile) as infile:
+            data = json.load(infile)
+        return data["lastUsedLanguage"] 
+    
     def set_locale(self, loc):
         if loc in self.data:
             self.locale = loc
