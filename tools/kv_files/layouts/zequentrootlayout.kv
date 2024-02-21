@@ -14,17 +14,15 @@
         MDTopAppBarTrailingButtonContainer:
             MDDropDownItem:
                 pos_hint: {"center_x": .5, "center_y": .5}
-                on_release: app.open_language_dropdown(self,sm)
+                on_release: root.open_language_dropdown(self,sm)
                 MDDropDownItemText:
                     id: drop_text
                     text: "Language"
             MDActionTopAppBarButton:
                 icon: "./static/icons/language_selection.png"
-                on_press: app.open_language_dropdown(self)
+                on_press: root.open_language_dropdown(self)
 
     ZequentRootScreenManager:
         id: sm
         ConnectionScreen:
-            name: '__connection_screen__'
         MainScreen:
-            name: '__main_screen__'

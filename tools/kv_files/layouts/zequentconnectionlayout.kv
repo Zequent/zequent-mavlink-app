@@ -22,7 +22,7 @@
     MDBoxLayout:
         ZequentLabel:
             id: connection_status_label
-            text: root.getConnectionStatusText()
+            text: root.connectionStatusText
         ZequentButton:
             text: 'Connect'
             on_press: root.tryConnection(self, connection_type, connection_status_label, app)
