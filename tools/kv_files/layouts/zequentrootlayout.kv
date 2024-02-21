@@ -1,4 +1,4 @@
-<ZequentRootLayout>
+<ZequentRootLayout>:
     orientation: "vertical"
     MDTopAppBar:
         type: "small"
@@ -14,7 +14,7 @@
         MDTopAppBarTrailingButtonContainer:
             MDDropDownItem:
                 pos_hint: {"center_x": .5, "center_y": .5}
-                on_release: root.open_language_dropdown(self,sm)
+                on_release: root.open_language_dropdown(self)
                 MDDropDownItemText:
                     id: drop_text
                     text: "Language"

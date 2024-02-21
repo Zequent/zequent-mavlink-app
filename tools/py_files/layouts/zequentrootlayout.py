@@ -9,9 +9,7 @@ class ZequentRootLayout(BoxLayout):
     translator = i18n.Translator('tools/localization/')
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-    def build(self):
+        super(ZequentRootLayout,self).__init__(**kwargs)
         print("-----------------------------------")
         print("-----------------------------------")
         print("-----------------------------------")
@@ -21,13 +19,15 @@ class ZequentRootLayout(BoxLayout):
         print("-----------------------------------")
         print("-----------------------------------")
         
+
+    def build(self):
         pass
 
-    def open_language_dropdown(self, item,sm):
-        menu_items = self.getLanguageDropDownItems(sm)
+    def open_language_dropdown(self, item):
+        menu_items = self.getLanguageDropDownItems()
         MDDropdownMenu(caller=item, items=menu_items).open()
 
-    def getLanguageDropDownItems(self,sm):
+    def getLanguageDropDownItems(self):
         from os import walk
 
         availableLanguages = []
@@ -40,7 +40,7 @@ class ZequentRootLayout(BoxLayout):
             currLanguageDropDownItem = {
                 "text": filename,
                 "font_size": self.fontSizes['primary'],
-                "on_release": lambda language=filename: self.setLanguage(language,sm),
+                "on_release": lambda language=filename: self.setLanguage(language),
             }
             availableLanguages.append(currLanguageDropDownItem)
         
@@ -54,7 +54,7 @@ class ZequentRootLayout(BoxLayout):
         mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
         mdDropDown.open()
     
-    def setLanguage(self, language,sm):
+    def setLanguage(self, language):
         ###TODO CHANGE SCREEN
         from kivy.uix.screenmanager import ScreenManager, Screen
         self.translator.set_locale(language)
