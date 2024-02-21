@@ -9,6 +9,23 @@ from kivy.metrics import dp
 from tools.py_files.layouts.zequentrootlayout import *
 from tools.py_files.screens.connectionscreen import *
 
+###IMPORT ALL PY_FILES
+def importPY_FILES():
+    import glob
+    import importlib.util
+    for filename in glob.iglob('tools/py_files/' + '**/**.py', recursive=True):
+        filename = filename.replace("/",".")
+        filename = filename[:-3]
+        if "__pycache__" not in filename:
+            importlib.import_module(filename)
+
+
+###IMPORT ALL KV_FILES
+def importKV_FILES():
+    import os
+    for currDirName, dirnames, filenames in os.walk('./tools/kv_files'):
+        for filename in filenames:
+            Builder.load_file(os.path.join(currDirName, filename)) 
 
 class ZequentMavLinkApp(MDApp):
 
@@ -46,33 +63,13 @@ class ZequentMavLinkApp(MDApp):
         self.title = "My Material Application"
         super().__init__(**kwargs)
         self.theme_cls.theme_style = "Dark"
-        self.importPY_FILES()
-        self.importKV_FILES()
+        importPY_FILES()
+        importKV_FILES()
 
     def build(self):
         pass
 
-    ###IMPORT ALL PY_FILES
-    def importPY_FILES(self):
-        import glob
-        import importlib.util
-        for filename in glob.iglob('tools/py_files/' + '**/**.py', recursive=True):
-            filename = filename.replace("/",".")
-            filename = filename[:-3]
-            if "__pycache__" not in filename:
-                importlib.import_module(filename)
-
-
-    ###IMPORT ALL KV_FILES
-    def importKV_FILES(self):
-        import os
-        for currDirName, dirnames, filenames in os.walk('./tools/kv_files'):
-            for filename in filenames:
-                print(os.path.join(currDirName, filename))
-                Builder.load_file(os.path.join(currDirName, filename)) 
-    
-    
-     ##Change Screen
+    ##Change Screen
     def changeScreen(self,*args):
         self.root.ids.sm.current = args[0]
         

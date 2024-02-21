@@ -8,5 +8,4 @@ class MainControllerLayout(BoxLayout):
     welcomeText = translator.translate('welcome')
 
     def __init__(self, **kwargs):
-        print(self.root)
         super().__init__(**kwargs)

@@ -9,7 +9,7 @@ class ZequentRootLayout(BoxLayout):
     translator = i18n.Translator('tools/localization/')
 
     def __init__(self, **kwargs):
-        super(ZequentRootLayout,self).__init__(**kwargs)
+        super().__init__(**kwargs)
         print("-----------------------------------")
         print("-----------------------------------")
         print("-----------------------------------")
