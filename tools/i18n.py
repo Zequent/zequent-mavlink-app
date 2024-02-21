@@ -7,6 +7,7 @@ import yaml
 from datetime import datetime
 from babel.dates import format_datetime
 import tools.Globals as Globals
+from kivy.properties import StringProperty
 
 supported_format = ['json', 'yaml']
 
@@ -15,7 +16,7 @@ class Translator():
     def __init__(self, translations_folder, file_format='json', default_locale='en'):
         # initialization
         self.data = {}
-        self.locale = 'de'
+        self.locale = self.getDefaultSettings()
         self.plural_rule = PluralRule({'one': 'n is 1'})
 
         # check if format is supported
@@ -32,7 +33,7 @@ class Translator():
                         self.data[loc] = yaml.safe_load(f)
 
 
-    def getDefaultSettings():
+    def getDefaultSettings(self):
         with open(Globals.settingsFile) as infile:
             data = json.load(infile)
         return data["lastUsedLanguage"] 

@@ -7,6 +7,7 @@ from functools import partial
 translator = i18n.Translator('tools/localization/')
 
 class ZequentConnectionLayout(BoxLayout):
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 

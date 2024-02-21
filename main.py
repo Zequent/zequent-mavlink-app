@@ -8,13 +8,14 @@ import json
 import tools.Globals as Globals
 from kivy.lang import Builder
 from kivy.metrics import dp
+from tools.py_files.layouts.zequentrootlayout import *
 
-##Localization
-translator = i18n.Translator('tools/localization/')
 
-    
 
 class ZequentMavLinkApp(MDApp):
+
+    ##Localization
+    translator = i18n.Translator('tools/localization/')
 
     customColors = {
         #Gold
@@ -73,7 +74,7 @@ class ZequentMavLinkApp(MDApp):
                 Builder.load_file(os.path.join(currDirName, filename)) 
 
     def get_welcome_text(self):
-        return translator.translate('welcome')
+        return self.translator.translate('welcome')
     
     def callback(self,x):
         print(x)
@@ -117,14 +118,14 @@ class ZequentMavLinkApp(MDApp):
     def setLanguage(self, language,sm):
         ###TODO CHANGE SCREEN
         from kivy.uix.screenmanager import ScreenManager, Screen
-        translator.set_locale(language)
+        self.translator.set_locale(language)
         self.saveInSettings(language)
-        updateScreen = sm.get_screen(sm.current)
-        updateScreen.name = sm.current
-        sm.add_widget(updateScreen)
-        sm.remove_widget(sm.get_screen(sm.current))
-        sm.current = updateScreen.name
+        Clock.schedule_once(partial(MDApp.get_running_app().restart), 3)
         
+    def restart(self, widget):
+        self.root.clear_widgets()
+        self.stop()
+        return ZequentMavLinkApp().run()
     
     def saveInSettings(self, language):
         with open(Globals.settingsFile) as infile:
