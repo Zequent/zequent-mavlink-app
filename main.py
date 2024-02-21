@@ -2,12 +2,9 @@ import tools.i18n as i18n
 from kivymd.app import MDApp
 from kivy.clock import Clock
 from functools import partial
-import tools.customWidgets as customWidgets
 import tools.Globals as Globals
 from kivy.lang import Builder
 from kivy.metrics import dp
-from tools.py_files.layouts.zequentrootlayout import *
-from tools.py_files.screens.connectionscreen import *
 
 ###IMPORT ALL PY_FILES
 def importPY_FILES():
@@ -63,8 +60,9 @@ class ZequentMavLinkApp(MDApp):
         self.title = "My Material Application"
         super().__init__(**kwargs)
         self.theme_cls.theme_style = "Dark"
-        importPY_FILES()
+
         importKV_FILES()
+        importPY_FILES()
 
     def build(self):
         pass

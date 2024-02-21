@@ -1,14 +1,7 @@
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivy.uix.button import Button
-from kivy.uix.widget import Widget
 from kivy_garden.mapview import MapView, MapMarker, MapSource
 import geocoder
 currentGeocoder = geocoder.ip('me')
 latitude, longitude = currentGeocoder.latlng
-
-###WIDGETS
-class ZequentButton(Button):
-    pass
 
 class ZequentMapView(MapView):
 
@@ -25,15 +18,3 @@ class ZequentMapView(MapView):
                             image_ext="png", attribution="@ThunderForest")
         self.map_source.from_provider("thunderforest-cycle")
         self.map_source = source
-    
-
-####LAYOUTS
-class MainControllerLayout(MDBoxLayout):
-    pass
-
-class ZequentRootLayout(MDBoxLayout):
-    pass
-
-class ZequentCameraLayout(MDBoxLayout):
-    pass
-

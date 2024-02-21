@@ -3,11 +3,12 @@ import tools.i18n as i18n
 from kivymd.uix.menu import MDDropdownMenu
 import json
 import tools.Globals as Globals
+from kivymd.app import MDApp
 
 class ZequentRootLayout(BoxLayout):
     ##Localization
     translator = i18n.Translator('tools/localization/')
-
+    app= MDApp.get_running_app()
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         print("-----------------------------------")
@@ -39,7 +40,7 @@ class ZequentRootLayout(BoxLayout):
             filename = filename.split('.json')[0]
             currLanguageDropDownItem = {
                 "text": filename,
-                "font_size": self.fontSizes['primary'],
+                "font_size": self.app.fontSizes['primary'],
                 "on_release": lambda language=filename: self.setLanguage(language),
             }
             availableLanguages.append(currLanguageDropDownItem)
