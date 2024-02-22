@@ -13,16 +13,18 @@ package.domain = org.zequent
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,json
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
+source.include_patterns = tools/settings/*
 
 # (list) Source files to exclude (let empty to not exclude anything)
-#source.exclude_exts = spec
+source.exclude_exts = cache/*
 
 # (list) List of directory to exclude (let empty to not exclude anything)
 #source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = cache, tests, venv
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
@@ -33,17 +35,17 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,babel,pyyaml,kivymd==1.0.1,pillow,kivy_garden,kivy-garden.mapview
+requirements = python3,babel==2.8.0,pyyaml==6.0.1,buildozer==1.5.0,Cython==3.0.8,Pillow==9.0.1,kivy_garden==0.1.5,kivy-garden.mapview==1.0.6,kivy==2.3.0,https://github.com/kivymd/KivyMD/archive/master.zip
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-presplash.filename = ./static/images/logo_modified.png
+presplash.filename = static/images/logo_modified.png
 
 # (str) Icon of the application
-icon.filename = ./static/images/logo_modified.png
+icon.filename = static/images/logo_modified.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse

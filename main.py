@@ -2,25 +2,23 @@ import tools.i18n as i18n
 from kivymd.app import MDApp
 from kivy.clock import Clock
 from functools import partial
-import tools.Globals as Globals
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import BooleanProperty
+import os
 
 ###IMPORT ALL PY_FILES
 def importPY_FILES():
     import glob
     import importlib.util
-    for filename in glob.iglob('tools/py_files/' + '**/**.py', recursive=True):
+    for filename in glob.iglob('tools/py_files/' + '**/**.py' or 'tools/py_files/' + '**/**.pyc' , recursive=True):
         filename = filename.replace("/",".")
         filename = filename[:-3]
-        if "__pycache__" not in filename:
-            importlib.import_module(filename)
+        importlib.import_module(filename)
 
 
 ###IMPORT ALL KV_FILES
 def importKV_FILES():
-    import os
     for currDirName, dirnames, filenames in os.walk('./tools/kv_files'):
         for filename in filenames:
             Builder.load_file(os.path.join(currDirName, filename)) 

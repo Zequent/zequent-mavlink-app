@@ -1,9 +1,10 @@
-kivy==2.3.0
-kivymd==1.2.0
 pyyaml==6.0.1
 babel==2.8.0
 buildozer==1.5.0
 Cython==3.0.8
 Pillow==9.0.1
-kivy_garden
-kivy-garden.mapview
+kivy_garden==0.1.5
+kivy-garden.mapview==1.0.6
+materialyoucolor==2.0.7
+kivy==2.3.0
+https://github.com/kivymd/KivyMD/archive/master.zip

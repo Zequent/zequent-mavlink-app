@@ -29,7 +29,14 @@ buildozer init
 ```shell
 buildozer android debug deploy run
 ```
-5. You'll find the ".apk" in project-root folder "bin"
+
+5. If app crashes use this command in other terminal:
+
+```shell
+adb logcat
+```
+
+6. You'll find the ".apk" in project-root folder "bin"
 
 
 # Troubleshooting - APK Creation
