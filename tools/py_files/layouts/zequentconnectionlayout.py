@@ -33,6 +33,7 @@ class ZequentConnectionLayout(BoxLayout):
                 button.disabled = True
                 currStateLabel.text = self.translator.translate('success_message')
                 currStateLabel.color = self.app.customColors["success"]
-                self.app.root.remove_widget(self.app.root.ids.language_selection)
+                #self.app.root.remove_widget(self.app.root.ids.language_selection)
+                self.app.connected = True
                 Clock.schedule_once(partial(self.app.changeScreen, '__main_screen__'), 3)
                 print("OK")

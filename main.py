@@ -55,13 +55,13 @@ class ZequentMavLinkApp(MDApp):
 
     toolBarTitle = "MavLink"
 
-    connected = BooleanProperty(False)
+    connected = BooleanProperty()
 
     def __init__(self, **kwargs):
         self.title = "My Material Application"
         super().__init__(**kwargs)
         self.theme_cls.theme_style = "Dark"
-
+        self.connected = False
         importKV_FILES()
         importPY_FILES()
 
