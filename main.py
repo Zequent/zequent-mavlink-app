@@ -5,6 +5,7 @@ from functools import partial
 import tools.Globals as Globals
 from kivy.lang import Builder
 from kivy.metrics import dp
+from kivy.properties import BooleanProperty
 
 ###IMPORT ALL PY_FILES
 def importPY_FILES():
@@ -54,7 +55,7 @@ class ZequentMavLinkApp(MDApp):
 
     toolBarTitle = "MavLink"
 
-    connected = False
+    connected = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         self.title = "My Material Application"
