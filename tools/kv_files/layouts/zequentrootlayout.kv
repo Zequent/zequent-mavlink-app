@@ -7,6 +7,7 @@
         MDTopAppBarLeadingButtonContainer:
             MDActionTopAppBarButton:
                 icon: "menu"
+                on_release: nav_drawer.set_state("open")
         MDTopAppBarTitle:
             text: "AppBar Center-aligned"
             pos_hint: {"center_x": .5}
@@ -21,7 +22,32 @@
                     text: "Language"
             MDActionTopAppBarButton:
                 icon: "./static/icons/language_selection.png"
-    ZequentRootScreenManager:
-        id: sm
-        ConnectionScreen:
-        MainScreen:
+    MDNavigationLayout:
+        ZequentRootScreenManager:
+            id: sm
+            ConnectionScreen:
+            MainScreen:
+        
+        MDNavigationDrawer:
+            id: nav_drawer
+            radius: 0, dp(16), dp(16), 0
+
+            MDNavigationDrawerMenu:
+
+                MDNavigationDrawerLabel:
+                    text: "Mail"
+
+                MDNavigationDrawerItem:
+
+                    MDNavigationDrawerItemLeadingIcon:
+                        icon: "account"
+
+                    MDNavigationDrawerItemText:
+                        text: "Inbox"
+
+                    MDNavigationDrawerItemTrailingText:
+                        text: "24"
+
+                MDNavigationDrawerDivider:
+
+    
