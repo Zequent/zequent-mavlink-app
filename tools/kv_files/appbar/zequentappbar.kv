@@ -1,25 +1,6 @@
 <ZequentAppBar>:
     id: topAppBar
-    type: "small"
+    title: "AppBar Center-aligned"
     md_bg_color: app.customColors["first"]
-    specific_text_color: app.customColors["black"]
-    MDTopAppBarLeadingButtonContainer:
-        MDActionTopAppBarButton:
-            opacity: 0 if not app.connected else 100
-            disabled: not app.connected
-            icon: "menu"
-            on_release: app.root.ids.nav_drawer.set_state("open")
-    MDTopAppBarTitle:
-        text: "AppBar Center-aligned"
-        pos_hint: {"center_x": .5}
-
-    MDTopAppBarTrailingButtonContainer:
-        MDDropDownItem: 
-            id: language_selection
-            opacity: 0 if app.connected else 100
-            disabled: app.connected
-            pos_hint: {"center_x": .5, "center_y": .5}
-            on_release: root.open_language_dropdown(self)
-            MDDropDownItemText:
-                id: drop_text
-                text: "Language"
+    left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("open")]]
+    right_action_items: [["./static/icons/language_selection.png", lambda x: root.open_language_dropdown(self)]]
