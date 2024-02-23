@@ -13,13 +13,17 @@ class ZequentAppBar(MDTopAppBar):
     #Localization
     translator = i18n.Translator('tools/localization/')
     app= MDApp.get_running_app()
+    dialog = None
+    mdDropDown = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def open_language_dropdown(self, item):
         menu_items = self.getLanguageDropDownItems()
-        MDDropdownMenu(caller=item, items=menu_items).open()
+        self.mdDropDown = MDDropdownMenu(caller=item, items=menu_items)
+        self.mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
+        self.mdDropDown.open()
 
     def getLanguageDropDownItems(self):
         self.app= MDApp.get_running_app()
@@ -41,14 +45,6 @@ class ZequentAppBar(MDTopAppBar):
         
         return availableLanguages
     
-    def changeLanguageOnStart(self, topBar):
-        menu_items = self.getDropDownItemsLanguage()
-        mdDropDown = MDDropdownMenu()
-        mdDropDown.caller=topBar
-        mdDropDown.items=menu_items
-        mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
-        mdDropDown.open()
-    
 
 
     def setLanguage(self, *args):
@@ -61,15 +57,19 @@ class ZequentAppBar(MDTopAppBar):
         submitButton = MDFlatButton()
         submitButton.text=self.translator.translate("submit")
         submitButton.bind(on_press=partial(self.setLanguage,language))
-        dialog = MDDialog(
+        self.dialog = MDDialog(
                 buttons=[
                     cancelButton,
                     submitButton
                 ]
             )
-        dialog.text = self.translator.translate('restart_text')
-
-        dialog.open()
+        self.dialog.text = self.translator.translate('restart_text')
+        cancelButton.bind(on_press=self.hide_alert_dialog) 
+        self.dialog.open()
+    
+    def hide_alert_dialog(self, instance):
+        self.mdDropDown.dismiss()
+        self.dialog.dismiss()
 
 
 
