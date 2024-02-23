@@ -32,7 +32,7 @@ from tools.py_files.widgets.zequentmapview import *
 from tools.py_files.widgets.zequentsingletextinput import *
 
 
-
+@DeprecationWarning
 ###IMPORT ALL PY_FILES
 def importPY_FILES():
     import glob
@@ -89,10 +89,8 @@ class ZequentMavLinkApp(MDApp):
         super().__init__(**kwargs)
         self.theme_cls.theme_style = "Dark"
         self.connected = False
-        #importPY_FILES()
         importKV_FILES()
         
-
     def build(self):
         pass
 
