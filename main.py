@@ -104,7 +104,7 @@ class ZequentMavLinkApp(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.connected = False
         importKV_FILES()
-        '''
+        
         if platform == 'android':
             gps.configure(on_location=self.on_gps_location)
             gps.start()
@@ -116,9 +116,9 @@ class ZequentMavLinkApp(MDApp):
             except TypeError:
                 print('Error on geolocation')
             toast("GPS only configured for Android")
-        '''
-        self.latitude = 48
-        self.longitude = 48
+        
+        #self.latitude = 48
+        #self.longitude = 48
 
 
     def on_start(self):
