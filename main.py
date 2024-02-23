@@ -7,6 +7,31 @@ from kivy.metrics import dp
 from kivy.properties import BooleanProperty
 import os
 
+##APPBAR
+from tools.py_files.appbar.zequentappbar import *
+
+##LAYOUTS
+from tools.py_files.layouts.maincontrollerlayout import *
+from tools.py_files.layouts.zequentcameralayout import *
+from tools.py_files.layouts.zequentconnectionlayout import *
+from tools.py_files.layouts.zequentrootlayout import *
+
+
+##SCREENMANAGER
+from tools.py_files.screenmanager.zequentrootscreenmanager import *
+
+##SCREENS
+
+from tools.py_files.screens.connectionscreen import *
+from tools.py_files.screens.mainscreen import *
+
+##WIDGETS
+from tools.py_files.widgets.zequentbutton import *
+from tools.py_files.widgets.zequentlabel import *
+from tools.py_files.widgets.zequentmapview import *
+from tools.py_files.widgets.zequentsingletextinput import *
+
+@DeprecationWarning
 ###IMPORT ALL PY_FILES
 def importPY_FILES():
     import glob
@@ -61,7 +86,6 @@ class ZequentMavLinkApp(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.connected = False
         importKV_FILES()
-        importPY_FILES()
 
     def build(self):
         pass

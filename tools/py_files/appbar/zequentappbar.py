@@ -19,7 +19,7 @@ class ZequentAppBar(MDTopAppBar):
 
     def getLanguageDropDownItems(self):
         from os import walk
-
+        self.app=MDApp.get_running_app()
         availableLanguages = []
         for (dirpath, dirnames, filenames) in walk('tools/localization/'):
             filenames = filenames
