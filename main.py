@@ -7,6 +7,14 @@ from kivy.metrics import dp
 from kivy.properties import BooleanProperty
 import os
 
+
+##toast
+from kivymd.toast import toast
+##Permission
+from kivy import platform
+from plyer import gps
+from tools.android.permissions import AndroidPermissions
+
 ##APPBAR
 from tools.py_files.appbar.zequentappbar import *
 
@@ -59,6 +67,9 @@ class ZequentMavLinkApp(MDApp):
 
     translator = i18n.Translator('tools/localization/')
 
+    latitude = 0
+    longitude = 0
+
     customColors = {
         #Gold
         "first": [0.78,0.56,0.05,1],
@@ -93,13 +104,44 @@ class ZequentMavLinkApp(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.connected = False
         importKV_FILES()
-        
+        '''
+        if platform == 'android':
+            gps.configure(on_location=self.on_gps_location)
+            gps.start()
+            toast("GPS on")
+        else:
+            currentGeocoder = geocoder.ip('me')
+            try:
+                self.latitude, self.longitude = currentGeocoder.latlng
+            except TypeError:
+                print('Error on geolocation')
+            toast("GPS only configured for Android")
+        '''
+        self.latitude = 48
+        self.longitude = 48
+
+
+    def on_start(self):
+        self.dont_gc = AndroidPermissions(self.start_app)
+
+    def start_app(self):
+        self.dont_gc = None
+
     def build(self):
         pass
 
     ##Change Screen
     def changeScreen(self,*args):
         self.root.ids.sm.current = args[0]
+    
+
+    def on_gps_location(self, *args, **kwargs):
+        #  kwargs are lat, lon, speed, bearing, altitude, accuracy
+        self.latitude = kwargs["lat"]
+        self.longitude = kwargs["lon"]
+        if self.latitude is not None:
+            print("{:.6f}".format(self.latitude))
+            print("{:.6f}".format(self.longitude))
         
 if __name__ == '__main__':
     ZequentMavLinkApp().run()

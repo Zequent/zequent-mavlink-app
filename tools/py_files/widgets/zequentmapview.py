@@ -1,30 +1,41 @@
 from kivy_garden.mapview import MapView, MapMarker, MapSource
 import geocoder
 currentGeocoder = geocoder.ip('me')
+from kivymd.app import MDApp
 
-latitude = 0
-longitude = 0
 
-try:
-    latitude, longitude = currentGeocoder.latlng
-except TypeError:
-    print('Error on geolocation')
 
 class ZequentMapView(MapView):
 
+   
+    app=MDApp.get_running_app()
+    latitude = 48
+    longitude = 48
+   
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        currLat =  latitude
-        currLon = longitude
         self.zoom=20
-        self.lat=currLat
-        self.lon=currLon
         apiKey = 'c7b23514f42f4878b7a8397f7ecfdef5'
         source = MapSource(url='https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey='+apiKey,
                             cache_key="thunderforest-map", tile_size=512,
                             image_ext="png", attribution="@ThunderForest")
         self.map_source.from_provider("thunderforest-cycle")
         self.map_source = source
+        self.updateMap()
+        
+    
+    def updateMap(self):
+        self.lat = self.latitude
+        self.lon = self.longitude
+        
+
+    def on_touch_down(self, touch):
+        self.app=MDApp.get_running_app()
+        self.latitude = self.app.latitude 
+        self.longitude = self.app.longitude
+        print(self.latitude)
+        self.updateMap()
+        return super().on_touch_down(touch)
     
     def build(self):
         pass
