@@ -25,12 +25,14 @@ class ZequentMapView(MapView):
         
     
     def updateMap(self):
+        latitude = 48
+        longitude = 48
+
         if(self.app is not None ):
-            self.lat = self.app.latitude
-            self.lon = self.app.longitude
-        else:  
-            self.lat = 48
-            self.lon = 48
+            latitude = self.app.latitude
+            longitude = self.app.longitude
+            
+        self.center_on(latitude, longitude)
 
     def on_touch_down(self, touch):
         self.app=MDApp.get_running_app()

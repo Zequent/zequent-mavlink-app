@@ -5,6 +5,7 @@ from functools import partial
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import BooleanProperty
+from kivy.properties import NumericProperty
 import os
 
 
@@ -67,8 +68,8 @@ class ZequentMavLinkApp(MDApp):
 
     translator = i18n.Translator('tools/localization/')
 
-    latitude = 0
-    longitude = 0
+    latitude = NumericProperty(48)
+    longitude = NumericProperty(48)
 
     customColors = {
         #Gold
@@ -113,14 +114,24 @@ class ZequentMavLinkApp(MDApp):
             currentGeocoder = geocoder.ip('me')
             try:
                 self.latitude, self.longitude = currentGeocoder.latlng
+                Clock.schedule_interval(self.updateLocation,1)
             except TypeError:
                 print('Error on geolocation')
+            gotLocation = True
             toast("GPS only configured for Android")
         
+
         #self.latitude = 48
         #self.longitude = 48
 
-
+    def updateLocation(self, _):
+        if platform is not 'android':
+            currentGeocoder = geocoder.ip('me')
+            try:
+                self.latitude, self.longitude = currentGeocoder.latlng
+            except TypeError:
+                print('Error on geolocation')
+                
     def on_start(self):
         self.dont_gc = AndroidPermissions(self.start_app)
 
