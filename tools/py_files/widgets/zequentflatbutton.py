@@ -1,6 +1,6 @@
-from kivy.uix.label import Label
+from kivymd.uix.button import MDFlatButton
 
-class ZequentLabel(Label):
+class ZequentFlatButton(MDFlatButton):
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

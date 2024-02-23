@@ -1,0 +1,12 @@
+<ZequentFlatButton>:
+    font_size: "40dp"
+    style: "filled"
+    background_normal: ''
+    background_color:  (0, 0,0,0)
+    canvas.before:
+        Color:
+            rgba: app.customColors["second"]
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [40]

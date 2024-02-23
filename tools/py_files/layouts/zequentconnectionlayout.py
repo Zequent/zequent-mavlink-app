@@ -4,18 +4,19 @@ import tools.i18n as i18n
 from functools import partial
 import tools.i18n as i18n
 from kivymd.app import MDApp
+from tools.Globals import *
 
 class ZequentConnectionLayout(BoxLayout):
     
-    ##Localization
-    translator = i18n.Translator('tools/localization/')
-
+    translator = i18n.Translator(Globals.getTranslatorFolder())
     connectionStatusText = translator.translate('not_connected')
-
     app= MDApp.get_running_app()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+    
+    def build(self):
+        pass
     
     def tryConnection(self,button, connectionType, currStateLabel):
             ###TODO: Define connect function with api###

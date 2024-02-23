@@ -25,3 +25,6 @@ class ZequentMapView(MapView):
                             image_ext="png", attribution="@ThunderForest")
         self.map_source.from_provider("thunderforest-cycle")
         self.map_source = source
+    
+    def build(self):
+        pass
