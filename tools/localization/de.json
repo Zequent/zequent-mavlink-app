@@ -2,5 +2,8 @@
     "welcome": "Willkommen, $name!",
     "not_connected": "Nicht verbunden!",
     "success_message": "Erfolgreich!",
-    "failed_message": "Fehlgeschlagen!"
+    "failed_message": "Fehlgeschlagen!",
+    "submit": "Bestätigen!",
+    "cancel": "Abbrechen!",
+    "restart_text": "Bei der Sprachänderung, wird die App geschlossen, sind Sie sich sicher?"
 }

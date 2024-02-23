@@ -2,8 +2,12 @@ from kivymd.uix.toolbar.toolbar import MDTopAppBar
 import tools.i18n as i18n
 from kivymd.uix.menu import MDDropdownMenu
 import json
-import tools.Globals as Globals
+from tools.Globals import *
 from kivymd.app import MDApp
+from tools.py_files.widgets.zequentbutton import *
+from functools import partial
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
 
 class ZequentAppBar(MDTopAppBar):
     #Localization
@@ -31,7 +35,7 @@ class ZequentAppBar(MDTopAppBar):
             currLanguageDropDownItem = {
                 "text": filename,
                 "font_size": self.app.fontSizes['primary'],
-                "on_release": lambda language=filename: self.setLanguage(language),
+                "on_release": lambda language=filename: self.show_alert_dialog(language),
             }
             availableLanguages.append(currLanguageDropDownItem)
         
@@ -45,18 +49,37 @@ class ZequentAppBar(MDTopAppBar):
         mdDropDown.pos_hint= {'center_x':.5,'center_y':.5}
         mdDropDown.open()
     
-    def setLanguage(self, language):
-        ###TODO CHANGE SCREEN
-        from kivy.uix.screenmanager import ScreenManager, Screen
-        self.translator.set_locale(language)
-        self.saveInSettings(language)
-        
+
+
+    def setLanguage(self, *args):
+        self.translator.set_locale(args[0])
+        self.saveInSettings(args[0])
+    
+    def show_alert_dialog(self, language):
+        cancelButton = MDFlatButton()
+        cancelButton.text = self.translator.translate("cancel")
+        submitButton = MDFlatButton()
+        submitButton.text=self.translator.translate("submit")
+        submitButton.bind(on_press=partial(self.setLanguage,language))
+        dialog = MDDialog(
+                buttons=[
+                    cancelButton,
+                    submitButton
+                ]
+            )
+        dialog.text = self.translator.translate('restart_text')
+
+        dialog.open()
+
+
+
     def saveInSettings(self, language):
-        with open(Globals.settingsFile) as infile:
+        with open(Globals.getSettingsFile()) as infile:
             data = json.load(infile)
         data["lastUsedLanguage"] = language
-        with open(Globals.settingsFile, 'w') as outfile:
+        with open(Globals.getSettingsFile(), 'w') as outfile:
             json.dump(data, outfile)
+            self.app.stop()
     
     def callback(self,x):
         print(x)
