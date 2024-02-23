@@ -20,6 +20,7 @@ class ZequentConnectionLayout(BoxLayout):
     def tryConnection(self,button, connectionType, currStateLabel):
             ###TODO: Define connect function with api###
             import random
+            self.app= MDApp.get_running_app()
             randInt = random.randint(0,1)
             if self.ids.rfc_button.disabled == False:
                 print("RFC")

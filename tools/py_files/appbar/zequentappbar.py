@@ -18,6 +18,7 @@ class ZequentAppBar(MDTopAppBar):
         MDDropdownMenu(caller=item, items=menu_items).open()
 
     def getLanguageDropDownItems(self):
+        self.app= MDApp.get_running_app()
         from os import walk
 
         availableLanguages = []

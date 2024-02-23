@@ -1,7 +1,14 @@
 from kivy_garden.mapview import MapView, MapMarker, MapSource
 import geocoder
 currentGeocoder = geocoder.ip('me')
-latitude, longitude = currentGeocoder.latlng
+
+latitude = 0
+longitude = 0
+
+try:
+    latitude, longitude = currentGeocoder.latlng
+except TypeError:
+    print('Error on geolocation')
 
 class ZequentMapView(MapView):
 

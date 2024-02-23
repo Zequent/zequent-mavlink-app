@@ -7,13 +7,42 @@ from kivy.metrics import dp
 from kivy.properties import BooleanProperty
 import os
 
+##APPBAR
+from tools.py_files.appbar.zequentappbar import *
+
+##LAYOUTS
+from tools.py_files.layouts.maincontrollerlayout import *
+from tools.py_files.layouts.zequentcameralayout import *
+from tools.py_files.layouts.zequentconnectionlayout import *
+from tools.py_files.layouts.zequentrootlayout import *
+
+
+##SCREENMANAGER
+from tools.py_files.screenmanager.zequentrootscreenmanager import *
+
+##SCREENS
+
+from tools.py_files.screens.connectionscreen import *
+from tools.py_files.screens.mainscreen import *
+
+##WIDGETS
+from tools.py_files.widgets.zequentbutton import *
+from tools.py_files.widgets.zequentlabel import *
+from tools.py_files.widgets.zequentmapview import *
+from tools.py_files.widgets.zequentsingletextinput import *
+
+
+
 ###IMPORT ALL PY_FILES
 def importPY_FILES():
     import glob
     import importlib.util
     for filename in glob.iglob('tools/py_files/' + '**/**.py' or 'tools/py_files/' + '**/**.pyc' , recursive=True):
+        #filename = os.path.abspath(filename)
         filename = filename.replace("/",".")
         filename = filename[:-3]
+        #filename = filename[1:]
+        print(filename)
         importlib.import_module(filename)
 
 
@@ -60,8 +89,9 @@ class ZequentMavLinkApp(MDApp):
         super().__init__(**kwargs)
         self.theme_cls.theme_style = "Dark"
         self.connected = False
+        #importPY_FILES()
         importKV_FILES()
-        importPY_FILES()
+        
 
     def build(self):
         pass
