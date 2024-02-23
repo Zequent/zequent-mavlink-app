@@ -27,6 +27,9 @@ from tools.py_files.screens.mainscreen import *
 
 ##WIDGETS
 from tools.py_files.widgets.zequentbutton import *
+from tools.py_files.widgets.zequentdialog import *
+from tools.py_files.widgets.zequentdropdownmenu import *
+from tools.py_files.widgets.zequentflatbutton import *
 from tools.py_files.widgets.zequentlabel import *
 from tools.py_files.widgets.zequentmapview import *
 from tools.py_files.widgets.zequentsingletextinput import *
