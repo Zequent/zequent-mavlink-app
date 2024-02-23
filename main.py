@@ -131,7 +131,9 @@ class ZequentMavLinkApp(MDApp):
                 self.latitude, self.longitude = currentGeocoder.latlng
             except TypeError:
                 print('Error on geolocation')
-                
+        else:
+            gps.configure(on_location=self.on_gps_location)   
+             
     def on_start(self):
         self.dont_gc = AndroidPermissions(self.start_app)
 
