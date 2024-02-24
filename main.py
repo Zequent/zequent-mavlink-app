@@ -117,12 +117,8 @@ class ZequentMavLinkApp(MDApp):
                 Clock.schedule_interval(self.updateLocation,1)
             except TypeError:
                 print('Error on geolocation')
-            gotLocation = True
             toast("GPS only configured for Android")
         
-
-        #self.latitude = 48
-        #self.longitude = 48
 
     def updateLocation(self, _):
         if platform is not 'android':
@@ -152,6 +148,8 @@ class ZequentMavLinkApp(MDApp):
         #  kwargs are lat, lon, speed, bearing, altitude, accuracy
         self.latitude = kwargs["lat"]
         self.longitude = kwargs["lon"]
+        toast("Latitude "+self.latitude)
+        toast("Longitude "+self.longitude)
         if self.latitude is not None:
             print("{:.6f}".format(self.latitude))
             print("{:.6f}".format(self.longitude))
