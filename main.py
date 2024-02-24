@@ -43,21 +43,6 @@ from tools.py_files.widgets.zequentlabel import *
 from tools.py_files.widgets.zequentmapview import *
 from tools.py_files.widgets.zequentsingletextinput import *
 
-
-@DeprecationWarning
-###IMPORT ALL PY_FILES
-def importPY_FILES():
-    import glob
-    import importlib.util
-    for filename in glob.iglob('tools/py_files/' + '**/**.py' or 'tools/py_files/' + '**/**.pyc' , recursive=True):
-        #filename = os.path.abspath(filename)
-        filename = filename.replace("/",".")
-        filename = filename[:-3]
-        #filename = filename[1:]
-        print(filename)
-        importlib.import_module(filename)
-
-
 ###IMPORT ALL KV_FILES
 def importKV_FILES():
     for currDirName, dirnames, filenames in os.walk('./tools/kv_files'):
