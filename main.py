@@ -30,7 +30,6 @@ from tools.py_files.layouts.zequentrootlayout import *
 from tools.py_files.screenmanager.zequentrootscreenmanager import *
 
 ##SCREENS
-
 from tools.py_files.screens.connectionscreen import *
 from tools.py_files.screens.mainscreen import *
 
