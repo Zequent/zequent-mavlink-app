@@ -79,12 +79,13 @@ class ZequentMavLinkApp(MDApp):
         "tertiary": dp(20)
     }
 
+    appTitle = "Baca"
     navBarTitle = "Baca"
 
     connected = BooleanProperty()
 
     def __init__(self, **kwargs):
-        self.title = "My Material Application"
+        self.title = self.appTitle
         super().__init__(**kwargs)
         self.theme_cls.theme_style = "Dark"
         self.connected = False
