@@ -80,7 +80,7 @@ class ZequentMavLinkApp(MDApp):
         "tertiary": dp(20)
     }
 
-    toolBarTitle = "MavLink"
+    navBarTitle = "Baca"
 
     connected = BooleanProperty()
 
