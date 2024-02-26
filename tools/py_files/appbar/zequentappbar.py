@@ -31,7 +31,7 @@ class ZequentAppBar(MDTopAppBar):
         from os import walk
 
         availableLanguages = []
-        for (dirpath, dirnames, filenames) in walk(Globals.getTranslatorFolder()):
+        for (dirpath, dirnames, filenames) in walk(Utils.getTranslatorFolder()):
             filenames = filenames
             break
 
@@ -69,10 +69,10 @@ class ZequentAppBar(MDTopAppBar):
     
 
     def saveInSettings(self, language):
-        with open(Globals.getSettingsFile()) as infile:
+        with open(Utils.getSettingsFile()) as infile:
             data = json.load(infile)
         data["lastUsedLanguage"] = language
-        with open(Globals.getSettingsFile(), 'w') as outfile:
+        with open(Utils.getSettingsFile(), 'w') as outfile:
             json.dump(data, outfile)
             self.app.stop()
 
