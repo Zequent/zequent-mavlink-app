@@ -5,8 +5,5 @@
     "failed_message": "Failure!",
     "submit": "Submit!",
     "cancel": "Cancel!",
-    "restart_text": "App will be closed on language change. Are you Sure?",
-
-    "main": "Main Menu",
-    "connection": "Connection "
+    "restart_text": "App will be closed on language change. Are you Sure?"
 }
