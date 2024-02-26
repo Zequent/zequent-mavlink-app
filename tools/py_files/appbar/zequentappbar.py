@@ -1,6 +1,6 @@
 from kivymd.uix.toolbar.toolbar import MDTopAppBar
 import json
-from tools.Globals import *
+from tools.Utils import *
 from kivymd.app import MDApp
 from tools.py_files.widgets.zequentdropdownmenu import *
 from tools.py_files.widgets.zequentdialog import *

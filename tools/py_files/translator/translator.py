@@ -8,7 +8,7 @@ import yaml
 from datetime import datetime
 from babel.dates import format_datetime
 from kivy.properties import StringProperty
-from tools.Globals import *
+from tools.Utils import *
 
 supported_format = ['json', 'yaml']
 
@@ -17,7 +17,7 @@ class Translator(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # initialization
-        translations_folder = Globals.getTranslatorFolder()
+        translations_folder = Utils.getTranslatorFolder()
         file_format='json'
         default_locale='en'
         self.data = {}
@@ -38,7 +38,7 @@ class Translator(Widget):
                         self.data[loc] = yaml.safe_load(f)
 
     def getDefaultSettings(self):
-        with open(Globals.getSettingsFile()) as infile:
+        with open(Utils.getSettingsFile()) as infile:
             data = json.load(infile)
         return data["lastUsedLanguage"] 
     

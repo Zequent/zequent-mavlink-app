@@ -1,6 +1,6 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
-from tools.Globals import *
+from tools.Utils import *
 
 class ZequentRootLayout(BoxLayout):
     app= MDApp.get_running_app()
