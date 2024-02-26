@@ -28,9 +28,6 @@ from tools.py_files.layouts.zequentrootlayout import *
 ##SCREENMANAGER
 from tools.py_files.screenmanager.zequentrootscreenmanager import *
 
-##SCREENS
-from tools.py_files.screens.connectionscreen import *
-from tools.py_files.screens.mainscreen import *
 
 ##Translator
 from tools.py_files.translator.translator import *
@@ -126,7 +123,7 @@ class ZequentMavLinkApp(MDApp):
 
     ##Change Screen
     def changeScreen(self,*args):
-        self.root.ids.sm.current = args[0]
+        self.root.ids.sm.push_replacement(args[0])
     
 
     def on_gps_location(self, *args, **kwargs):

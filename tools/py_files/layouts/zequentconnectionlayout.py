@@ -2,7 +2,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
 from functools import partial
 from kivymd.app import MDApp
-from tools.Globals import *
+from tools.Utils import *
 
 class ZequentConnectionLayout(BoxLayout):
     
@@ -36,5 +36,5 @@ class ZequentConnectionLayout(BoxLayout):
                 currStateLabel.color = self.app.customColors["success"]
                 #self.app.root.remove_widget(self.app.root.ids.language_selection)
                 self.app.connected = True
-                Clock.schedule_once(partial(self.app.changeScreen, '__main_screen__'), 3)
+                Clock.schedule_once(partial(self.app.changeScreen, 'main'), 3)
                 print("OK")

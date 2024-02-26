@@ -1,5 +1,5 @@
 from kivy.uix.boxlayout import BoxLayout
-from tools.Globals import *
+from tools.Utils import *
 
 from kivymd.app import MDApp
 
