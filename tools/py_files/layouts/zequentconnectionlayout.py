@@ -1,21 +1,20 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
-import tools.i18n as i18n
 from functools import partial
-import tools.i18n as i18n
 from kivymd.app import MDApp
 from tools.Globals import *
 
 class ZequentConnectionLayout(BoxLayout):
     
-    translator = i18n.Translator(Globals.getTranslatorFolder())
-    connectionStatusText = translator.translate('not_connected')
+    connectionStatusText = ''
     app= MDApp.get_running_app()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        
     
     def build(self):
+        self.connectionStatusText = self.root.ids.translator.translate('not_connected')
         pass
     
     def tryConnection(self,button, connectionType, currStateLabel):
@@ -29,11 +28,11 @@ class ZequentConnectionLayout(BoxLayout):
                 lteAddress=self.ids.lte_address
                 print("LTE adress:"+str(lteAddress.text))
             if randInt == 0:
-                currStateLabel.text = self.translator.translate('failed_message')
+                currStateLabel.text = self.app.root.ids.translator.translate('failed_message')
                 currStateLabel.color = self.app.customColors["failure"]
             else:
                 button.disabled = True
-                currStateLabel.text = self.translator.translate('success_message')
+                currStateLabel.text = self.app.root.ids.translator.translate('success_message')
                 currStateLabel.color = self.app.customColors["success"]
                 #self.app.root.remove_widget(self.app.root.ids.language_selection)
                 self.app.connected = True

@@ -1,4 +1,3 @@
-import tools.i18n as i18n
 from kivymd.app import MDApp
 from kivy.clock import Clock
 from functools import partial
@@ -33,6 +32,9 @@ from tools.py_files.screenmanager.zequentrootscreenmanager import *
 from tools.py_files.screens.connectionscreen import *
 from tools.py_files.screens.mainscreen import *
 
+##Translator
+from tools.py_files.translator.translator import *
+
 ##WIDGETS
 from tools.py_files.widgets.zequentbutton import *
 from tools.py_files.widgets.zequentdialog import *
@@ -49,8 +51,6 @@ def importKV_FILES():
             Builder.load_file(os.path.join(currDirName, filename)) 
 
 class ZequentMavLinkApp(MDApp):
-
-    translator = i18n.Translator('tools/localization/')
 
     latitude = NumericProperty(48)
     longitude = NumericProperty(48)
