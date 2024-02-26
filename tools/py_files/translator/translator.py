@@ -1,3 +1,4 @@
+from kivy.uix.widget import Widget
 from babel.plural import PluralRule
 import json
 from string import Template
@@ -11,10 +12,14 @@ from tools.Globals import *
 
 supported_format = ['json', 'yaml']
 
+class Translator(Widget):
 
-class Translator():
-    def __init__(self, translations_folder, file_format='json', default_locale='en'):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # initialization
+        translations_folder = Globals.getTranslatorFolder()
+        file_format='json'
+        default_locale='en'
         self.data = {}
         self.locale = self.getDefaultSettings()
         self.plural_rule = PluralRule({'one': 'n is 1'})
@@ -31,7 +36,6 @@ class Translator():
                         self.data[loc] = json.load(f)
                     elif file_format == 'yaml':
                         self.data[loc] = yaml.safe_load(f)
-
 
     def getDefaultSettings(self):
         with open(Globals.getSettingsFile()) as infile:
@@ -75,6 +79,6 @@ class Translator():
         return Template(text).safe_substitute(**kwargs)
 
 
-def parse_datetime(dt, input_format='%Y-%m-%d', output_format='MMMM dd, yyyy', output_locale='en'):
-    dt = datetime.strptime(dt, input_format)
-    return format_datetime(dt, format=output_format, locale=output_locale)
+    def parse_datetime(dt, input_format='%Y-%m-%d', output_format='MMMM dd, yyyy', output_locale='en'):
+        dt = datetime.strptime(dt, input_format)
+        return format_datetime(dt, format=output_format, locale=output_locale)

@@ -1,5 +1,4 @@
 from kivymd.uix.toolbar.toolbar import MDTopAppBar
-import tools.i18n as i18n
 import json
 from tools.Globals import *
 from kivymd.app import MDApp
@@ -11,7 +10,8 @@ from functools import partial
 
 
 class ZequentAppBar(MDTopAppBar):
-    translator = i18n.Translator(Globals.getTranslatorFolder())
+
+    translator = None
     app=MDApp.get_running_app()
     submitDialog = None
     languageDropdown = None
@@ -47,6 +47,7 @@ class ZequentAppBar(MDTopAppBar):
         return availableLanguages
     
     def show_alert_dialog(self, language):
+        self.translator = self.app.root.ids.translator
         cancelButton = ZequentFlatButton()
         cancelButton.text = self.translator.translate("cancel")
         cancelButton.bind(on_press=self.hide_alert_dialog) 
