@@ -1,0 +1,14 @@
+{
+    "main": {
+        "main": {
+            "import": "from tools.py_files.screens.mainscreen import MainScreen",
+            "object": "MainScreen()",
+            "kv": "tools/kv_files/screens/mainscreen.kv"
+        },
+        "connection": {
+            "import": "from tools.py_files.screens.connectionscreen import ConnectionScreen",
+            "object": "ConnectionScreen()",
+            "kv": "tools/kv_files/screens/connectionscreen.kv"
+        }
+    }
+}

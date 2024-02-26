@@ -54,8 +54,8 @@ class ZequentRootScreenManager(ScreenManager):
         self.load_screen(screen_name)
 
         # set transition direction
-        self.transition.direction = side
-
+        #self.transition.direction = side
+        self.transition.direction = 'up'
         # set current screen
         self.current = screen_name
 
