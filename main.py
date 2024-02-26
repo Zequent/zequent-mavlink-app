@@ -24,6 +24,9 @@ from tools.py_files.layouts.zequentcameralayout import *
 from tools.py_files.layouts.zequentconnectionlayout import *
 from tools.py_files.layouts.zequentrootlayout import *
 
+##Navigationdrawer
+from tools.py_files.navigationdrawer.zequentnavigationdrawer import *
+
 
 ##SCREENMANAGER
 from tools.py_files.screenmanager.zequentrootscreenmanager import *

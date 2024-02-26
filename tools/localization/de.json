@@ -5,5 +5,8 @@
     "failed_message": "Fehlgeschlagen!",
     "submit": "Bestätigen!",
     "cancel": "Abbrechen!",
-    "restart_text": "Bei der Sprachänderung, wird die App geschlossen, sind Sie sich sicher?"
+    "restart_text": "Bei der Sprachänderung, wird die App geschlossen, sind Sie sich sicher?",
+
+    "main": "Hauptmenü",
+    "connection": "Verbindung"
 }
