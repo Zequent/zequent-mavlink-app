@@ -1,22 +1,21 @@
 <ZequentConnectionLayout>:
-    orientation: "vertical"
     size_hint: 1, 1
-    ZequentButton:
-        id: rfc_button
-        text: 'RFC'
-        disabled: not lte_button.disabled 
-        on_press: self.disabled = True
-        font_size: "40dp"
-    ZequentBoxLayout: 
+    ZequentGridLayout:
+        cols:2 
         id: connection_type
+        ZequentAnchorLayout:
+            ZequentButton:
+                id: rfc_button
+                text: 'RFC'
+                disabled: not lte_button.disabled 
+                on_press: self.disabled = True
+        ZequentLabel:
         ZequentAnchorLayout:
             ZequentButton:
                 id: lte_button
                 text: 'LTE'
                 disabled: not rfc_button.disabled
                 on_press: self.disabled = True
-                font_size: "40dp"
-                position_hint: {'center_x':0.5, 'center_y':0.5}
         ZequentAnchorLayout:
             ZequentSingleTextInput:
                 id: lte_address
